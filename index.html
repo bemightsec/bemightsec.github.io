@@ -127,10 +127,25 @@
       font-weight: 800;
     }
 
-    .typing {
-  display: inline-block;
-  color: var(--blue);
+    .brand-row .mini {
+  color: var(--cyan);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-size: 0.85rem;
   font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.brand-row h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.06;
+  font-weight: 800;
+}
+
+.typing {
+  display: inline-block;
+  color: #ffffff;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid var(--cyan);
@@ -143,6 +158,10 @@
 @keyframes typing {
   from { width: 0; }
   to { width: 22ch; }
+}
+
+@keyframes blink {
+  50% { border-color: transparent; }
 }
     @keyframes blink {
       50% { border-color: transparent; }
@@ -623,14 +642,13 @@
 
   <header class="hero-wrap">
     <div class="container">
-      <div class="brand-row">
-        <div class="mini">BeMight</div>
-        <h1><span class="typing">Cybersecurity</span></h1>
-        <div class="typing-wrap">
-          <span class="typing">Portfolio</span>
-        </div>
-        <p>Simple • Practical • Accessible</p>
-      </div>
+     <div class="brand-row">
+  <div class="mini">BeMight</div>
+  <h1>
+    <span class="typing">Cybersecurity Portfolio</span>
+  </h1>
+  <p>Simple • Practical • Accessible</p>
+</div>
 
       <nav class="top-nav">
         <a class="active" href="#about">About Me</a>
