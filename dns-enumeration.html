@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DNS Enumeration Lab | BeMight</title>
+  <meta
+    name="description"
+    content="DNS Enumeration Lab by BeMight - a practical cybersecurity project focused on reconnaissance, DNS records, and information gathering."
+  />
+  <style>
+    :root {
+      --bg: #f5f8fc;
+      --card: #ffffff;
+      --card-soft: #f8fbff;
+      --text: #14263d;
+      --muted: #5f738b;
+      --line: #d9e5f1;
+      --navy: #0b2340;
+      --navy-2: #102d50;
+      --blue: #3dbdff;
+      --cyan: #38e7d2;
+      --purple: #7d6bff;
+      --shadow: 0 12px 28px rgba(19, 41, 67, 0.08);
+      --shadow-hover: 0 18px 38px rgba(19, 41, 67, 0.12);
+      --radius: 20px;
+      --max: 980px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(61,189,255,0.08), transparent 18%),
+        linear-gradient(180deg, #f8fbff 0%, #f3f7fc 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(100% - 28px, var(--max));
+      margin: 0 auto;
+    }
+
+    .top-line {
+      height: 6px;
+      background: linear-gradient(90deg, var(--cyan) 0%, var(--blue) 45%, var(--purple) 100%);
+    }
+
+    .hero {
+      background: linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
+      color: #fff;
+      padding: 34px 0 40px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.88);
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+
+    .back-link:hover {
+      color: var(--cyan);
+    }
+
+    .hero h1 {
+      margin: 0 0 10px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.08;
+    }
+
+    .hero p {
+      margin: 0;
+      max-width: 760px;
+      color: rgba(255,255,255,0.8);
+      font-size: 1rem;
+    }
+
+    .content {
+      padding: 42px 0 54px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    .hero-image {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: var(--card-soft);
+    }
+
+    .label-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--card-soft);
+      border: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    h2 {
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: var(--navy);
+    }
+
+    p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .list {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+
+    .list li + li {
+      margin-top: 8px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 22px;
+    }
+
+    .cta-box {
+      background: linear-gradient(135deg, #0e2747, #13345e);
+      color: #fff;
+      border-radius: 22px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .cta-box h3 {
+      margin: 0 0 10px;
+      font-size: 1.5rem;
+    }
+
+    .cta-box p {
+      margin: 0 0 18px;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .btn {
+      min-height: 46px;
+      padding: 0 18px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      border: 1px solid transparent;
+      transition: 0.2s ease;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      color: #07111f;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .footer {
+      padding: 0 0 30px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .two-col {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-line"></div>
+
+  <header class="hero">
+    <div class="container">
+      <a class="back-link" href="index.html">← Back to Portfolio</a>
+      <h1>DNS Enumeration Lab</h1>
+      <p>
+        A practical reconnaissance lab focused on DNS analysis, subdomain discovery, and information gathering using command-line tools.
+      </p>
+    </div>
+  </header>
+
+  <main class="content">
+    <div class="container">
+      <div class="card">
+        <img class="hero-image" src="images/project-dns.jpg" alt="DNS Enumeration Lab screenshot" />
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <div class="label-row">
+            <span class="label">Project 03</span>
+            <span class="label">Reconnaissance</span>
+            <span class="label">DNS Analysis</span>
+            <span class="label">Enumeration</span>
+          </div>
+
+          <h2>Project Overview</h2>
+          <p>
+            This lab demonstrates my practical understanding of DNS enumeration and early-stage reconnaissance. The goal was to gather public information about a target domain, inspect DNS records, and understand how domain infrastructure can be mapped during security assessments.
+          </p>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="card-body">
+            <h2>Tools Used</h2>
+            <ul class="list">
+              <li>dig</li>
+              <li>nslookup</li>
+              <li>Subfinder</li>
+              <li>Basic DNS and TCP/IP knowledge</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h2>Focus Area</h2>
+            <p>
+              Reconnaissance, DNS record analysis, and information gathering as part of practical cybersecurity investigation workflow.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2>What I Did</h2>
+          <ul class="list">
+            <li>Queried DNS records such as A, MX, TXT, and NS records</li>
+            <li>Performed reverse lookups on domains</li>
+            <li>Enumerated subdomains using command-line tools</li>
+            <li>Observed domain infrastructure and documented findings</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2>Outcome</h2>
+          <p>
+            I successfully gathered useful DNS and subdomain information, improved my understanding of reconnaissance workflows, and became more confident using practical enumeration techniques in a lab environment.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2>What I Learned</h2>
+          <p>
+            This lab helped me understand how attackers and defenders can use public DNS information during the early stages of an assessment. It strengthened my command-line confidence and improved my ability to investigate digital infrastructure methodically.
+          </p>
+        </div>
+      </div>
+
+      <div class="cta-box">
+        <h3>More Projects Coming</h3>
+        <p>
+          I’m continuing to build hands-on cybersecurity projects and labs as part of my practical learning journey.
+        </p>
+        <a class="btn" href="index.html#projects">Back to Projects</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">© 2026 BeMight</div>
+  </footer>
+</body>
+</html>
