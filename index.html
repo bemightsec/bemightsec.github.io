@@ -597,6 +597,14 @@
       font-size: 0.95rem;
     }
 
+    .project-link {
+  display: block;
+}
+
+.project-link .panel {
+  height: 100%;
+}
+
     .footer-nav {
       display: flex;
       gap: 18px;
@@ -762,20 +770,22 @@
         </p>
 
         <div class="grid-3">
-          <article class="panel">
-            <div class="panel-top"></div>
-            <div class="panel-body">
-              <div class="panel-label">
-                <span>Project 01</span>
-                <span class="track">Analysis</span>
-              </div>
-              <img src="project-traffic.jpg" alt="Network traffic analysis project" />
-              <h3>Network Traffic Analysis Lab</h3>
-              <p>
-                Analyzed packet captures using Wireshark to identify suspicious traffic, detect anomalies, and document findings from a simulated environment.
-              </p>
-            </div>
-          </article>
+          <a href="network-traffic-analysis.html" class="project-link">
+  <article class="panel">
+    <div class="panel-top"></div>
+    <div class="panel-body">
+      <div class="panel-label">
+        <span>Project 01</span>
+        <span class="track">Analysis</span>
+      </div>
+      <img src="project-traffic.jpg" alt="Network traffic analysis project" />
+      <h3>Network Traffic Analysis Lab</h3>
+      <p>
+        Analyzed packet captures using Wireshark to identify suspicious traffic, detect anomalies, and document findings from a simulated environment.
+      </p>
+    </div>
+  </article>
+</a>
 
          <a href="https://docs.google.com/presentation/d/1bZ5p-kXjyngknw12JotNZ3lIN7X1tBro/edit?usp=sharing&ouid=112496117602264797179&rtpof=true&sd=true" target="_blank" rel="noreferrer" class="project-link">
   <article class="panel">
