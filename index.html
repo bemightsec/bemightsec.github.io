@@ -130,30 +130,24 @@
       color: #ffffff;
     }
 
-    .typing-wrap {
-      margin-top: 8px;
-      display: inline-block;
-      max-width: 50%;
-    }
+   .typing {
+  display: inline-block;
+  color: var(--blue);
+  font-weight: 800;
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid var(--cyan);
+  width: 0;
+  animation:
+    typing 2.5s steps(9, end) forwards,
+    blink 0.75s step-end infinite;
+}
 
-    .typing {
-      display: inline-block;
-      color: var(--blue);
-      font-weight: 800;
-      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-      white-space: nowrap;
-      overflow: hidden;
-      border-right: 3px solid var(--cyan);
-      width: 0;
-      animation:
-        typing 4s steps(22, end) infinite alternate,
-        blink 0.75s step-end infinite;
-    }
-
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 22ch; }
-    }
+@keyframes typing {
+  from { width: 0; }
+  to { width: 9ch; }
+}
 
     @keyframes blink {
       50% { border-color: transparent; }
