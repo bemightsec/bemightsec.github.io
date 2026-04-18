@@ -9,25 +9,32 @@
     name="description"
     content="BeMight - Junior Cybersecurity Analyst portfolio focused on threat detection, network security, digital protection, projects, tools, and certifications."
   />
+  <meta name="theme-color" content="#0b2340" />
   <style>
     :root {
-      --bg: #f5f8fc;
-      --bg-soft: #edf3f9;
-      --card: #ffffff;
-      --card-soft: #f8fbff;
-      --text: #14263d;
-      --muted: #5f738b;
-      --line: #d9e5f1;
-      --navy: #0b2340;
-      --navy-2: #102d50;
-      --blue: #3dbdff;
-      --cyan: #38e7d2;
-      --purple: #7d6bff;
-      --orange: #ff8c66;
-      --green: #2fd980;
-      --shadow: 0 12px 28px rgba(19, 41, 67, 0.08);
-      --shadow-hover: 0 18px 38px rgba(19, 41, 67, 0.12);
-      --radius: 20px;
+      --bg: #09111d;
+      --bg-soft: #101a29;
+      --bg-panel: rgba(10, 20, 34, 0.82);
+      --card: #f4f9ff;
+      --card-soft: #edf5ff;
+      --text: #dce8f8;
+      --text-strong: #ffffff;
+      --ink: #11253a;
+      --muted: #91a7c2;
+      --line: rgba(144, 176, 214, 0.18);
+      --line-strong: rgba(144, 176, 214, 0.34);
+      --navy: #081321;
+      --navy-2: #0b2340;
+      --navy-3: #13335e;
+      --blue: #52c7ff;
+      --cyan: #45f0d6;
+      --orange: #ff9966;
+      --green: #35e18f;
+      --glow: rgba(82, 199, 255, 0.22);
+      --shadow: 0 18px 50px rgba(0, 0, 0, 0.28);
+      --shadow-soft: 0 16px 30px rgba(8, 18, 31, 0.16);
+      --radius: 22px;
+      --radius-sm: 14px;
       --max: 1180px;
     }
 
@@ -41,12 +48,26 @@
 
     body {
       margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(61, 189, 255, 0.08), transparent 18%),
-        linear-gradient(180deg, #f8fbff 0%, #f3f7fc 100%);
+      font-family: "Segoe UI Variable", "Segoe UI", "Helvetica Neue", sans-serif;
       line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(82, 199, 255, 0.1), transparent 22%),
+        radial-gradient(circle at 85% 12%, rgba(69, 240, 214, 0.1), transparent 20%),
+        linear-gradient(180deg, #07111d 0%, #0c1726 38%, #111e30 100%);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(82, 199, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(82, 199, 255, 0.05) 1px, transparent 1px);
+      background-size: 34px 34px;
+      mask-image: radial-gradient(circle at center, black 42%, transparent 100%);
+      pointer-events: none;
+      z-index: -1;
     }
 
     a {
@@ -54,20 +75,38 @@
       text-decoration: none;
     }
 
-    .bullet-list a {
-      color: #1b8fe0;
-      font-weight: 600;
-      transition: color 0.2s ease, text-decoration 0.2s ease;
-    }
-
-    .bullet-list a:hover {
-      color: #3dbdff;
-      text-decoration: underline;
-    }
-
     img {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--cyan);
+      outline-offset: 3px;
+    }
+
+    .skip-link {
+      position: absolute;
+      left: 16px;
+      top: -48px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: var(--cyan);
+      color: #04111d;
+      font-weight: 800;
+      z-index: 10;
+      transition: top 0.2s ease;
+    }
+
+    .skip-link:focus {
+      top: 16px;
     }
 
     .container {
@@ -77,66 +116,72 @@
 
     .top-line {
       height: 6px;
-      background: linear-gradient(
-        90deg,
-        var(--cyan) 0%,
-        var(--blue) 35%,
-        var(--purple) 70%,
-        var(--orange) 100%
-      );
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--orange));
+      box-shadow: 0 0 24px rgba(82, 199, 255, 0.35);
     }
 
     .hero-wrap {
-      background:
-        radial-gradient(circle at 20% 10%, rgba(61, 189, 255, 0.1), transparent 20%),
-        linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 100%);
-      color: #fff;
-      padding: 24px 0 38px;
       position: relative;
       overflow: hidden;
+      padding: 26px 0 46px;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(82, 199, 255, 0.1), transparent 18%),
+        radial-gradient(circle at 90% 14%, rgba(69, 240, 214, 0.08), transparent 14%),
+        linear-gradient(180deg, var(--navy) 0%, var(--navy-2) 60%, var(--navy-3) 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     }
 
     .hero-wrap::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background:
-        radial-gradient(circle at 85% 15%, rgba(56, 231, 210, 0.08), transparent 18%);
+      inset: auto -10% 10% auto;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(82, 199, 255, 0.18) 0%, transparent 70%);
+      filter: blur(10px);
       pointer-events: none;
     }
 
-    .brand-row {
-      text-align: center;
+    .brand-row,
+    .hero-panel,
+    .top-nav-wrap {
       position: relative;
       z-index: 1;
     }
 
-    .brand-row .mini {
+    .brand-row {
+      text-align: center;
+    }
+
+    .mini {
+      margin: 0 0 10px;
       color: var(--cyan);
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
-      letter-spacing: 1.4px;
-      font-size: 0.85rem;
-      font-weight: 800;
-      margin-bottom: 6px;
     }
 
     .brand-row h1 {
       margin: 0;
-      font-size: clamp(2rem, 5vw, 3.6rem);
-      line-height: 1.06;
-      font-weight: 800;
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.04;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
     }
 
     .typing {
       display: inline-block;
-      color: #ffffff;
-      white-space: nowrap;
       overflow: hidden;
+      white-space: nowrap;
       border-right: 3px solid var(--cyan);
       width: 0;
       animation:
-        typing 3.5s steps(22, end) forwards,
-        blink 0.75s step-end infinite;
+        typing 3.2s steps(22, end) forwards,
+        blink 0.8s step-end infinite;
     }
 
     @keyframes typing {
@@ -149,148 +194,188 @@
     }
 
     .brand-row p {
-      margin: 10px 0 0;
-      font-size: 0.82rem;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      margin: 12px 0 0;
       color: rgba(255, 255, 255, 0.7);
+      font-size: 0.83rem;
       font-weight: 700;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
     }
 
     .top-nav-wrap {
-      margin-top: 22px;
-      position: relative;
-      z-index: 1;
+      margin-top: 24px;
+    }
+
+    .nav-shell {
+      display: flex;
+      justify-content: center;
     }
 
     .menu-toggle {
       display: none;
-      min-height: 46px;
-      min-width: 56px;
-      padding: 0 16px;
-      border: none;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--blue), var(--cyan));
-      color: #07111f;
-      font-size: 1.4rem;
-      font-weight: 800;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      min-width: 140px;
+      padding: 0 18px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
       cursor: pointer;
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(12px);
     }
 
     .top-nav {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 10px;
-      margin-top: 0;
+      width: min(100%, 920px);
       padding: 10px;
       background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 18px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 10px 22px rgba(0, 0, 0, 0.18);
-      position: relative;
-      z-index: 1;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
 
     .top-nav a {
-      min-height: 48px;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
+      min-height: 48px;
+      padding: 0 10px;
       border-radius: 12px;
-      font-size: 0.94rem;
-      font-weight: 700;
+      text-align: center;
       color: rgba(255, 255, 255, 0.78);
-      transition: all 0.2s ease;
-      background: rgba(255, 255, 255, 0.02);
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
     }
 
-    .top-nav a.active,
-    .top-nav a:hover {
+    .top-nav a:hover,
+    .top-nav a.active {
       background: linear-gradient(135deg, var(--blue), var(--cyan));
-      color: #07111f;
+      color: #04111d;
+      transform: translateY(-1px);
     }
 
     .hero-panel {
-      margin-top: 24px;
+      margin-top: 26px;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
       gap: 20px;
       align-items: stretch;
-      position: relative;
-      z-index: 1;
     }
 
     .hero-main,
     .hero-side {
       border-radius: var(--radius);
-      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
     }
 
     .hero-main {
-      padding: 30px;
+      padding: 32px;
     }
 
     .eyebrow {
-      display: inline-block;
-      margin-bottom: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
       color: var(--cyan);
-      font-weight: 800;
-      letter-spacing: 1.4px;
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      font-size: 0.78rem;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
     }
 
     .hero-main h2 {
       margin: 0 0 14px;
-      font-size: clamp(2rem, 4vw, 3.35rem);
-      line-height: 1.05;
-      max-width: 720px;
+      max-width: 760px;
+      color: var(--text-strong);
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.03;
     }
 
     .hero-main p {
       margin: 0;
-      color: rgba(255, 255, 255, 0.78);
       max-width: 700px;
+      color: rgba(255, 255, 255, 0.78);
       font-size: 1rem;
     }
 
     .hero-actions {
       display: flex;
-      gap: 12px;
       flex-wrap: wrap;
-      margin-top: 22px;
+      gap: 12px;
+      margin-top: 24px;
     }
 
     .btn {
-      min-height: 48px;
-      padding: 0 18px;
-      border-radius: 12px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
+      min-height: 50px;
+      padding: 0 18px;
       border: 1px solid transparent;
-      transition: 0.2s ease;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .btn-primary {
+      color: #05101c;
       background: linear-gradient(135deg, var(--blue), var(--cyan));
-      color: #07111f;
+      box-shadow: 0 12px 28px rgba(69, 240, 214, 0.18);
     }
 
     .btn-secondary {
-      background: rgba(255, 255, 255, 0.07);
       color: #fff;
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .stat-card {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .stat-card strong {
+      display: block;
+      color: var(--text-strong);
+      font-size: 1.35rem;
+    }
+
+    .stat-card span {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.9rem;
     }
 
     .hero-side {
@@ -301,26 +386,33 @@
       justify-content: space-between;
     }
 
-    .mini-profile {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      padding: 14px;
-      border-radius: 16px;
+    .mini-profile,
+    .focus-box,
+    .signal-box {
+      padding: 16px;
+      border-radius: 18px;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
+    .mini-profile {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
     .mini-profile img {
-      width: 58px;
-      height: 58px;
-      border-radius: 14px;
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
       object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.14);
       background: #fff;
     }
 
     .mini-profile strong {
       display: block;
+      color: var(--text-strong);
       font-size: 1rem;
     }
 
@@ -329,30 +421,31 @@
       font-size: 0.92rem;
     }
 
-    .focus-box {
-      border-radius: 18px;
-      padding: 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .focus-box h3 {
+    .focus-box h3,
+    .signal-box h3 {
       margin: 0 0 10px;
+      color: var(--text-strong);
       font-size: 1rem;
     }
 
-    .focus-box ul {
+    .focus-box ul,
+    .signal-box ul {
       margin: 0;
       padding-left: 18px;
-      color: rgba(255, 255, 255, 0.76);
+      color: rgba(255, 255, 255, 0.78);
     }
 
-    .focus-box li + li {
+    .focus-box li + li,
+    .signal-box li + li {
       margin-top: 8px;
     }
 
-    section.portal-section {
-      padding: 52px 0 8px;
+    main {
+      display: block;
+    }
+
+    .portal-section {
+      padding: 60px 0 8px;
     }
 
     .section-title {
@@ -363,70 +456,63 @@
     }
 
     .section-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--blue), var(--cyan));
-      color: #07111f;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
-      box-shadow: var(--shadow);
-      flex: 0 0 auto;
+      border-radius: 50%;
+      color: #06111d;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 0 26px var(--glow);
     }
 
     .section-title h2 {
       margin: 0;
-      font-size: clamp(1.65rem, 3vw, 2.4rem);
-      color: var(--text);
+      color: var(--text-strong);
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
     }
 
     .section-sub {
-      margin: 0 0 24px 54px;
-      color: var(--muted);
+      margin: 0 0 26px 56px;
       max-width: 860px;
+      color: var(--muted);
     }
 
+    .grid-2,
     .grid-3 {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
       gap: 18px;
     }
 
     .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 18px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
-    .project-link {
-      display: block;
-    }
-
-    .project-link .panel {
-      height: 100%;
-    }
-
-    .project-link:hover .panel {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: #c7dbef;
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
     .panel {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 20px;
-      box-shadow: var(--shadow);
+      height: 100%;
       overflow: hidden;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(244, 249, 255, 0.98));
+      box-shadow: var(--shadow-soft);
       transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
     }
 
     .panel:hover {
       transform: translateY(-4px);
-      box-shadow: var(--shadow-hover);
-      border-color: #c7dbef;
+      border-color: rgba(82, 199, 255, 0.45);
+      box-shadow: 0 20px 36px rgba(9, 17, 29, 0.22);
+    }
+
+    .project-link {
+      display: block;
     }
 
     .panel-top {
@@ -435,74 +521,74 @@
     }
 
     .panel-top.orange {
-      background: linear-gradient(90deg, #ffaf7a, var(--orange));
-    }
-
-    .panel-top.purple {
-      background: linear-gradient(90deg, #a18dff, var(--purple));
+      background: linear-gradient(90deg, #ffba80, var(--orange));
     }
 
     .panel-top.green {
-      background: linear-gradient(90deg, #6cf0ad, var(--green));
+      background: linear-gradient(90deg, #6ef0af, var(--green));
     }
 
     .panel-body {
       padding: 20px;
+      color: var(--ink);
     }
 
     .panel-label {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
       margin-bottom: 12px;
-      color: var(--text);
-      font-size: 0.8rem;
-      font-weight: 800;
+      color: var(--ink);
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      letter-spacing: 0.7px;
     }
 
     .track {
-      font-size: 0.66rem;
       padding: 5px 8px;
       border-radius: 999px;
-      background: var(--bg-soft);
-      color: var(--muted);
-      font-weight: 700;
+      color: #44607b;
+      background: var(--card-soft);
+      border: 1px solid rgba(17, 37, 58, 0.08);
+      font-size: 0.66rem;
+      font-weight: 800;
     }
 
     .panel h3 {
       margin: 0 0 8px;
+      color: var(--ink);
       font-size: 1.12rem;
-      color: var(--text);
     }
 
     .panel p {
       margin: 0;
-      color: var(--muted);
+      color: #4f647b;
       font-size: 0.95rem;
     }
 
     .panel img {
       width: 100%;
       height: 190px;
+      margin-bottom: 14px;
       object-fit: cover;
       border-radius: 14px;
-      margin-bottom: 14px;
-      background: var(--bg-soft);
+      background: #dce8f8;
     }
 
     .about-card {
       display: grid;
-      grid-template-columns: 300px 1fr;
+      grid-template-columns: 320px minmax(0, 1fr);
       gap: 18px;
       align-items: stretch;
     }
 
-    .about-card .portrait {
+    .portrait {
+      width: 100%;
       height: 100%;
-      min-height: 320px;
+      min-height: 340px;
       object-fit: cover;
       border-radius: 16px;
     }
@@ -511,9 +597,9 @@
       margin-top: 18px;
       padding: 16px 18px;
       border-radius: 16px;
-      background: var(--card-soft);
-      border: 1px solid var(--line);
-      color: var(--text);
+      color: var(--ink);
+      background: linear-gradient(135deg, #edf7ff, #e8fff7);
+      border: 1px solid rgba(17, 37, 58, 0.08);
       font-style: italic;
     }
 
@@ -527,34 +613,55 @@
     .chip {
       display: inline-flex;
       align-items: center;
-      min-height: 34px;
+      min-height: 36px;
       padding: 0 12px;
       border-radius: 999px;
+      color: #45607d;
       background: var(--card-soft);
-      border: 1px solid var(--line);
-      color: var(--muted);
+      border: 1px solid rgba(17, 37, 58, 0.08);
       font-size: 0.88rem;
       font-weight: 700;
     }
 
     .bullet-list {
-      margin: 12px 0 0;
+      margin: 14px 0 0;
       padding-left: 18px;
-      color: var(--muted);
+      color: #4f647b;
     }
 
     .bullet-list li + li {
       margin-top: 8px;
     }
 
+    .bullet-list a {
+      color: #0f7dbe;
+      font-weight: 700;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 2px;
+    }
+
+    .bullet-list a:hover {
+      color: #1399e6;
+    }
+
+    .cta-box {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
     .footer-banner {
-      margin: 54px 0 30px;
-      background: linear-gradient(135deg, #0e2747, #13345e);
-      color: #fff;
-      border-radius: 24px;
-      padding: 30px 28px 26px;
       position: relative;
       overflow: hidden;
+      margin: 58px 0 30px;
+      padding: 30px 28px 26px;
+      border-radius: 24px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 80% 20%, rgba(69, 240, 214, 0.14), transparent 20%),
+        linear-gradient(135deg, #0b1f37, #14345e 60%, #0d2441 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: var(--shadow);
     }
 
@@ -565,32 +672,33 @@
       right: 0;
       bottom: 0;
       height: 6px;
-      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--purple), var(--orange));
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--orange));
     }
 
     .footer-banner h3 {
       margin: 0 0 8px;
-      font-size: 2rem;
       color: #fff;
+      font-size: clamp(1.6rem, 3vw, 2rem);
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.04em;
     }
 
     .footer-banner p {
       margin: 0;
       color: rgba(255, 255, 255, 0.82);
-      text-transform: uppercase;
-      font-size: 0.82rem;
-      letter-spacing: 1.3px;
+      font-size: 0.84rem;
       font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
     }
 
     .site-footer {
-      padding: 0 0 30px;
+      padding: 0 0 34px;
     }
 
     .footer-row {
       display: flex;
+      align-items: center;
       justify-content: space-between;
       gap: 16px;
       flex-wrap: wrap;
@@ -600,19 +708,54 @@
 
     .footer-nav {
       display: flex;
-      gap: 18px;
       flex-wrap: wrap;
+      gap: 18px;
     }
 
     .footer-nav a:hover {
-      color: var(--text);
+      color: var(--text-strong);
     }
 
-    @media (max-width: 900px) {
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      animation: reveal 0.7s ease forwards;
+    }
+
+    .reveal.delay-1 { animation-delay: 0.08s; }
+    .reveal.delay-2 { animation-delay: 0.16s; }
+    .reveal.delay-3 { animation-delay: 0.24s; }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .typing {
+        width: auto;
+        border-right: none;
+      }
+    }
+
+    @media (max-width: 980px) {
       .hero-panel,
       .about-card,
-      .grid-3,
-      .grid-2 {
+      .grid-2,
+      .grid-3 {
         grid-template-columns: 1fr;
       }
 
@@ -621,23 +764,26 @@
       }
 
       .hero-main h2 {
-        font-size: clamp(1.8rem, 7vw, 2.6rem);
+        font-size: clamp(1.9rem, 7vw, 2.8rem);
       }
 
-      .about-card .portrait {
-        min-height: 260px;
+      .hero-stats {
+        grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 768px) {
+      .nav-shell {
+        justify-content: center;
+      }
+
       .menu-toggle {
         display: inline-flex;
-        align-items: center;
-        justify-content: center;
       }
 
       .top-nav {
         display: none;
+        width: min(100%, 420px);
         grid-template-columns: 1fr;
         margin-top: 12px;
       }
@@ -648,21 +794,26 @@
     }
 
     @media (max-width: 640px) {
-      .typing {
-        font-size: 1rem;
-      }
-
       .container {
         width: min(100% - 18px, var(--max));
       }
 
       .hero-main,
       .hero-side,
-      .panel-body {
-        padding: 16px;
+      .panel-body,
+      .footer-banner {
+        padding-left: 16px;
+        padding-right: 16px;
       }
 
-      .hero-actions {
+      .hero-main,
+      .hero-side {
+        padding-top: 18px;
+        padding-bottom: 18px;
+      }
+
+      .hero-actions,
+      .cta-box {
         flex-direction: column;
       }
 
@@ -674,70 +825,89 @@
         align-items: flex-start;
       }
 
-      .panel img {
-        height: auto;
-      }
-
-      .about-card .portrait {
-        width: 100%;
+      .panel img,
+      .portrait {
         height: auto;
         min-height: unset;
       }
 
       .footer-row {
         flex-direction: column;
-        gap: 8px;
+        align-items: flex-start;
       }
 
       .footer-nav {
-        gap: 10px;
-      }
-
-      .section-title h2 {
-        font-size: 1.9rem;
+        gap: 12px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="top-line"></div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <div class="top-line" aria-hidden="true"></div>
 
-  <header class="hero-wrap">
+  <header class="hero-wrap" id="home">
     <div class="container">
-      <div class="brand-row">
-        <div class="mini">BeMight</div>
-        <h1>
-          <span class="typing">Cybersecurity Portfolio</span>
-        </h1>
+      <div class="brand-row reveal">
+        <p class="mini">BeMight</p>
+        <h1><span class="typing">Cybersecurity Portfolio</span></h1>
         <p>Simple • Practical • Accessible</p>
       </div>
 
-      <nav class="top-nav-wrap">
-        <button class="menu-toggle" aria-label="Open menu" onclick="toggleMenu()">☰</button>
+      <div class="top-nav-wrap reveal delay-1">
+        <div class="nav-shell">
+          <button
+            class="menu-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="site-menu"
+          >
+            Menu
+          </button>
+        </div>
 
-        <div class="top-nav" id="mobileMenu">
+        <nav class="top-nav" id="site-menu" aria-label="Primary">
           <a class="active" href="#about">About Me</a>
           <a href="#projects">Projects & Labs</a>
           <a href="#tools">Tools & Skills</a>
           <a href="#certifications">Certifications</a>
           <a href="#contact">Contact</a>
-        </div>
-      </nav>
+        </nav>
+      </div>
 
-      <div class="hero-panel">
-        <div class="hero-main">
-          <span class="eyebrow">Making Cybersecurity Simple, Practical, and Accessible</span>
-          <h2>Junior Cybersecurity Analyst focused on threat detection, network security, and digital protection.</h2>
+      <div class="hero-panel reveal delay-2">
+        <section class="hero-main" aria-labelledby="hero-heading">
+          <span class="eyebrow">Making Cybersecurity Practical and Understandable</span>
+          <h2 id="hero-heading">
+            Junior Cybersecurity Analyst focused on threat detection, network security, and digital protection.
+          </h2>
           <p>
-            I document my cybersecurity journey, practice real tools, and build hands-on security skills to identify and prevent digital threats.
+            I document my cybersecurity journey, practice real tools, and build hands-on security skills to identify,
+            investigate, and reduce digital risk in a clear and useful way.
           </p>
+
           <div class="hero-actions">
             <a class="btn btn-primary" href="#projects">Explore My Work</a>
             <a class="btn btn-secondary" href="#contact">Let’s Connect</a>
           </div>
-        </div>
 
-        <aside class="hero-side">
+          <div class="hero-stats" aria-label="Highlights">
+            <div class="stat-card">
+              <strong>3+</strong>
+              <span>Portfolio projects and labs</span>
+            </div>
+            <div class="stat-card">
+              <strong>6</strong>
+              <span>Security tools in active practice</span>
+            </div>
+            <div class="stat-card">
+              <strong>1</strong>
+              <span>Clear mission: protect systems and people</span>
+            </div>
+          </div>
+        </section>
+
+        <aside class="hero-side" aria-label="Profile overview">
           <div class="mini-profile">
             <img src="profile.png" alt="Prince Awuku Anobaah" />
             <div>
@@ -749,10 +919,19 @@
           <div class="focus-box">
             <h3>Current Focus</h3>
             <ul>
-              <li>Threat Detection</li>
-              <li>Network Security</li>
-              <li>Digital Protection</li>
-              <li>Hands-on tools practice and cybersecurity learning</li>
+              <li>Threat detection and traffic review</li>
+              <li>Network security fundamentals</li>
+              <li>Digital protection and awareness</li>
+              <li>Hands-on tools practice and documentation</li>
+            </ul>
+          </div>
+
+          <div class="signal-box">
+            <h3>What This Portfolio Shows</h3>
+            <ul>
+              <li>Structured labs with clear outcomes</li>
+              <li>Projects grounded in practical security work</li>
+              <li>Ongoing growth through certifications and study</li>
             </ul>
           </div>
         </aside>
@@ -760,21 +939,22 @@
     </div>
   </header>
 
-  <main>
-    <section id="about" class="portal-section">
+  <main id="main-content">
+    <section id="about" class="portal-section" aria-labelledby="about-title">
       <div class="container">
         <div class="section-title">
           <span class="section-number">1</span>
-          <h2>Who I Am</h2>
+          <h2 id="about-title">Who I Am</h2>
         </div>
         <p class="section-sub">
           My journey, learning path, and the direction I am building toward in cybersecurity.
         </p>
 
-        <div class="panel about-card">
+        <article class="panel about-card">
           <div class="panel-body">
-            <img class="portrait" src="profile.png" alt="Prince Awuku Anobaah" />
+            <img class="portrait" src="profile.png" alt="Prince Awuku Anobaah" loading="eager" />
           </div>
+
           <div class="panel-body">
             <div class="panel-label">
               <span>Profile</span>
@@ -782,14 +962,16 @@
             </div>
             <h3>About Me</h3>
             <p>
-              I’m Prince Awuku Anobaah, a cybersecurity learner and aspiring analyst currently undergoing structured training. I practice real-world tools, study modern security concepts, and document my progress to help others understand digital protection.
+              I’m Prince Awuku Anobaah, a cybersecurity learner and aspiring analyst currently undergoing structured
+              training. I practice real-world tools, study modern security concepts, and document my progress to help
+              others understand digital protection with confidence.
             </p>
 
             <div class="quote-box">
-              “Cybersecurity is not just a skill — it’s a responsibility to protect people, systems, and data.”
+              “Cybersecurity is not just a skill. It is a responsibility to protect people, systems, and data.”
             </div>
 
-            <div class="chips">
+            <div class="chips" aria-label="Key interests">
               <span class="chip">Threat Detection</span>
               <span class="chip">Network Security</span>
               <span class="chip">Digital Protection</span>
@@ -798,22 +980,22 @@
               <span class="chip">Security Skills</span>
             </div>
           </div>
-        </div>
+        </article>
       </div>
     </section>
 
-    <section id="projects" class="portal-section">
+    <section id="projects" class="portal-section" aria-labelledby="projects-title">
       <div class="container">
         <div class="section-title">
           <span class="section-number">2</span>
-          <h2>Projects & Labs</h2>
+          <h2 id="projects-title">Projects & Labs</h2>
         </div>
         <p class="section-sub">
           A selection of projects and practical exercises that demonstrate my hands-on cybersecurity learning journey.
         </p>
 
         <div class="grid-3">
-          <a href="network-traffic-analysis.html" class="project-link">
+          <a href="network-traffic-analysis.html" class="project-link" aria-label="Open Network Traffic Analysis Lab">
             <article class="panel">
               <div class="panel-top"></div>
               <div class="panel-body">
@@ -821,16 +1003,23 @@
                   <span>Project 01</span>
                   <span class="track">Analysis</span>
                 </div>
-                <img src="project-traffic.jpg" alt="Network traffic analysis project" />
+                <img src="project-traffic.jpg" alt="Network traffic analysis project" loading="lazy" />
                 <h3>Network Traffic Analysis Lab</h3>
                 <p>
-                  Analyzed packet captures using Wireshark to identify suspicious traffic, detect anomalies, and document findings from a simulated environment.
+                  Analyzed packet captures using Wireshark to identify suspicious traffic, detect anomalies, and
+                  document findings from a simulated environment.
                 </p>
               </div>
             </article>
           </a>
 
-          <a href="https://docs.google.com/presentation/d/1bZ5p-kXjyngknw12JotNZ3lIN7X1tBro/edit?usp=sharing&ouid=112496117602264797179&rtpof=true&sd=true" target="_blank" rel="noreferrer" class="project-link">
+          <a
+            href="https://docs.google.com/presentation/d/1bZ5p-kXjyngknw12JotNZ3lIN7X1tBro/edit?usp=sharing&ouid=112496117602264797179&rtpof=true&sd=true"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="project-link"
+            aria-label="Open Phishing Awareness Project in a new tab"
+          >
             <article class="panel">
               <div class="panel-top orange"></div>
               <div class="panel-body">
@@ -838,27 +1027,29 @@
                   <span>Project 02</span>
                   <span class="track">Awareness</span>
                 </div>
-                <img src="project-phishing.jpg" alt="Phishing awareness project" />
+                <img src="project-phishing.jpg" alt="Phishing awareness project" loading="lazy" />
                 <h3>Phishing Awareness Project</h3>
                 <p>
-                  Created a cybersecurity awareness presentation explaining phishing attacks, social engineering risks, and safe digital practices for users and organisations.
+                  Created a cybersecurity awareness presentation explaining phishing attacks, social engineering risks,
+                  and safe digital practices for users and organisations.
                 </p>
               </div>
             </article>
           </a>
 
-          <a href="dns-enumeration.html" class="project-link">
+          <a href="dns-enumeration.html" class="project-link" aria-label="Open DNS Enumeration Lab">
             <article class="panel">
-              <div class="panel-top purple"></div>
+              <div class="panel-top green"></div>
               <div class="panel-body">
                 <div class="panel-label">
                   <span>Project 03</span>
                   <span class="track">Reconnaissance</span>
                 </div>
-                <img src="project-dns.jpg" alt="DNS enumeration lab" />
+                <img src="project-dns.jpg" alt="DNS enumeration lab" loading="lazy" />
                 <h3>DNS Enumeration Lab</h3>
                 <p>
-                  Performed reconnaissance and information gathering using dig, nslookup, and Subfinder to analyze DNS records and domain infrastructure.
+                  Performed reconnaissance and information gathering using dig, nslookup, and Subfinder to analyze DNS
+                  records and domain infrastructure.
                 </p>
               </div>
             </article>
@@ -867,18 +1058,18 @@
       </div>
     </section>
 
-    <section id="tools" class="portal-section">
+    <section id="tools" class="portal-section" aria-labelledby="tools-title">
       <div class="container">
         <div class="section-title">
           <span class="section-number">3</span>
-          <h2>Tools & Skills</h2>
+          <h2 id="tools-title">Tools & Skills</h2>
         </div>
         <p class="section-sub">
           Practical tools and skill areas I work with as I continue building my cybersecurity foundation.
         </p>
 
         <div class="grid-2">
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -894,9 +1085,9 @@
                 <li>Subfinder</li>
               </ul>
             </div>
-          </div>
+          </article>
 
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top green"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -912,23 +1103,23 @@
                 <li>Hands-on Security Skills</li>
               </ul>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="certifications" class="portal-section">
+    <section id="certifications" class="portal-section" aria-labelledby="certifications-title">
       <div class="container">
         <div class="section-title">
           <span class="section-number">4</span>
-          <h2>Learning & Development</h2>
+          <h2 id="certifications-title">Learning & Development</h2>
         </div>
         <p class="section-sub">
           Certifications and structured learning that support my cybersecurity journey and technical growth.
         </p>
 
         <div class="grid-2">
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -938,10 +1129,10 @@
               <h3>Introduction to Cybersecurity</h3>
               <p>Cisco Networking Academy</p>
             </div>
-          </div>
+          </article>
 
-          <div class="panel">
-            <div class="panel-top purple"></div>
+          <article class="panel">
+            <div class="panel-top green"></div>
             <div class="panel-body">
               <div class="panel-label">
                 <span>Professional Development</span>
@@ -950,9 +1141,9 @@
               <h3>Professional Foundations</h3>
               <p>ALX Africa</p>
             </div>
-          </div>
+          </article>
 
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top orange"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -962,10 +1153,10 @@
               <h3>Cybersecurity Learning Journey</h3>
               <p>Structured hands-on training and self-driven practice</p>
             </div>
-          </div>
+          </article>
 
-          <div class="panel">
-            <div class="panel-top green"></div>
+          <article class="panel">
+            <div class="panel-top"></div>
             <div class="panel-body">
               <div class="panel-label">
                 <span>Academic</span>
@@ -974,23 +1165,23 @@
               <h3>BTech ICT</h3>
               <p>Koforidua Technical University</p>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="portal-section">
+    <section id="contact" class="portal-section" aria-labelledby="contact-title">
       <div class="container">
         <div class="section-title">
           <span class="section-number">5</span>
-          <h2>Contact & Availability</h2>
+          <h2 id="contact-title">Contact & Availability</h2>
         </div>
         <p class="section-sub">
-          Let’s secure your digital world — protecting your systems today so you can move confidently into the future.
+          Let’s secure your digital world by building practical skills, strong habits, and safer systems.
         </p>
 
         <div class="grid-2">
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -1000,14 +1191,14 @@
               <h3>Let’s connect</h3>
               <p>Open to internships, collaborations, and cybersecurity learning opportunities.</p>
               <ul class="bullet-list">
-                <li><a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noreferrer">LinkedIn</a></li>
-                <li><a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noreferrer">YouTube</a></li>
-                <li><a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noreferrer">WhatsApp Channel</a></li>
+                <li><a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                <li><a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+                <li><a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">WhatsApp Channel</a></li>
               </ul>
             </div>
-          </div>
+          </article>
 
-          <div class="panel">
+          <article class="panel">
             <div class="panel-top green"></div>
             <div class="panel-body">
               <div class="panel-label">
@@ -1016,13 +1207,15 @@
               </div>
               <h3>Explore My Work</h3>
               <p>
-                Currently building practical cybersecurity experience through projects, labs, tools practice, and structured learning.
+                Currently building practical cybersecurity experience through projects, labs, tool practice, and
+                structured learning.
               </p>
-              <div style="margin-top:16px;">
+              <div class="cta-box">
                 <a class="btn btn-primary" href="mailto:contact.bemightsec@gmail.com">Send Email</a>
+                <a class="btn btn-secondary" href="#projects">View Projects</a>
               </div>
             </div>
-          </div>
+          </article>
         </div>
 
         <div class="footer-banner">
@@ -1036,7 +1229,7 @@
   <footer class="site-footer">
     <div class="container footer-row">
       <div>© 2026 BeMight</div>
-      <nav class="footer-nav">
+      <nav class="footer-nav" aria-label="Footer">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#tools">Tools</a>
@@ -1047,16 +1240,59 @@
   </footer>
 
   <script>
-    function toggleMenu() {
-      const menu = document.getElementById("mobileMenu");
-      menu.classList.toggle("show");
+    const menuToggle = document.querySelector(".menu-toggle");
+    const siteMenu = document.getElementById("site-menu");
+    const navLinks = [...document.querySelectorAll(".top-nav a")];
+    const sections = [...document.querySelectorAll("main section[id]")];
+
+    function setMenuState(isOpen) {
+      siteMenu.classList.toggle("show", isOpen);
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
     }
 
-    document.querySelectorAll("#mobileMenu a").forEach(link => {
+    menuToggle.addEventListener("click", () => {
+      const isOpen = menuToggle.getAttribute("aria-expanded") === "true";
+      setMenuState(!isOpen);
+    });
+
+    navLinks.forEach((link) => {
       link.addEventListener("click", () => {
-        document.getElementById("mobileMenu").classList.remove("show");
+        if (window.innerWidth <= 768) {
+          setMenuState(false);
+        }
       });
     });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        setMenuState(false);
+      }
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        setMenuState(false);
+      }
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+
+          navLinks.forEach((link) => {
+            const match = link.getAttribute("href") === `#${entry.target.id}`;
+            link.classList.toggle("active", match);
+          });
+        });
+      },
+      {
+        rootMargin: "-40% 0px -45% 0px",
+        threshold: 0.1
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
   </script>
 </body>
 </html>
