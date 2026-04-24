@@ -206,13 +206,7 @@
       transform: translateY(-1px);
     }
 
-    .nav-cta {
-      color: #07100d !important;
-      background: var(--green);
-      box-shadow: 0 12px 28px rgba(119, 242, 161, 0.12);
-    }
-
-    .hero {
+        .hero {
       padding: 62px 0 48px;
       border-bottom: 1px solid var(--line);
     }
@@ -1040,7 +1034,7 @@
   <header class="site-header">
     <div class="container header-row">
       <a class="brand" href="#home" aria-label="BeMight homepage">
-        <img class="brand-logo" src="securitylogo.png" alt="BeMight Security logo" />
+        <img class="brand-logo" src="fav.png" alt="BeMight Security logo" />
         <span class="brand-text">
           <strong>BeMight</strong>
           <span>Cybersecurity Portfolio</span>
@@ -1050,11 +1044,11 @@
       <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
 
       <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="#about" class="active">About</a>
+        <a href="#about">About</a>
         <a href="#projects">Projects</a>
         <a href="#tools">Tools</a>
         <a href="#certifications">Certifications</a>
-        <a href="#contact" class="nav-cta">Contact</a>
+        <a href="#contact">Contact</a>
       </nav>
     </div>
   </header>
@@ -1441,7 +1435,7 @@
     const navLinks = [...document.querySelectorAll(".site-nav a")];
     const tocLinks = [...document.querySelectorAll(".toc a")];
     const allTrackedLinks = [...navLinks, ...tocLinks];
-    const sections = [...document.querySelectorAll("main section[id]")];
+    const sections = [...document.querySelectorAll("main section[id], .hero[id]")];
     const backToTop = document.getElementById("backToTop");
 
     function setMenu(open) {
