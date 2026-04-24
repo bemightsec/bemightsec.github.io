@@ -426,6 +426,21 @@
       font-weight: 850;
     }
 
+    .fallback-box {
+      padding: 20px;
+      border-radius: 20px;
+      background: #fffdf7;
+      border: 1px solid rgba(17, 26, 21, 0.09);
+      color: var(--ink-soft);
+    }
+
+    .fallback-box strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--ink);
+      font-size: 1.05rem;
+    }
+
     .cta-banner {
       margin-top: 34px;
       padding: 34px;
@@ -707,8 +722,9 @@
     const newsStatus = document.getElementById("newsStatus");
     const refreshNews = document.getElementById("refreshNews");
 
-    const WORDPRESS_API = "https://cybersecuritynews.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia,wp:term&per_page=10";
+    const WORDPRESS_API = "https://cybersecuritynews.com/wp-json/wp/v2/posts?_embed=1&per_page=10";
     const RSS_PROXY_API = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fcybersecuritynews.com%2Ffeed%2F";
+    const ALL_ORIGINS_RSS = "https://api.allorigins.win/raw?url=https%3A%2F%2Fcybersecuritynews.com%2Ffeed%2F";
     const FALLBACK_IMAGE = "securitylogo.png";
 
     function setMenu(open) {
@@ -765,6 +781,17 @@
       });
     }
 
+    function fetchWithTimeout(url, options = {}, timeout = 12000) {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), timeout);
+
+      return fetch(url, {
+        ...options,
+        signal: controller.signal,
+        cache: "no-store"
+      }).finally(() => clearTimeout(timer));
+    }
+
     function decodeHTML(html) {
       const textarea = document.createElement("textarea");
       textarea.innerHTML = html || "";
@@ -810,8 +837,9 @@
     }
 
     function getCategory(post) {
-      const terms = post?._embedded?.["wp:term"]?.flat?.() || [];
-      const category = terms.find((term) => term.taxonomy === "category");
+      const embeddedTerms = post?._embedded?.["wp:term"] || [];
+      const flatTerms = embeddedTerms.flat ? embeddedTerms.flat() : [];
+      const category = flatTerms.find((term) => term.taxonomy === "category");
       return category?.name || "Cyber Security News";
     }
 
@@ -826,41 +854,64 @@
       };
     }
 
-    function extractImageFromRSSItem(item) {
-      const html = item?.content || item?.description || "";
-      const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-      return item?.thumbnail || item?.enclosure?.link || match?.[1] || FALLBACK_IMAGE;
+    function extractImageFromHTML(html) {
+      const match = String(html || "").match(/<img[^>]+src=["']([^"']+)["']/i);
+      return match?.[1] || FALLBACK_IMAGE;
     }
 
     function normalizeRSSItem(item) {
       return {
         title: decodeHTML(item?.title || "Untitled story"),
-        excerpt: stripHTML(item?.description || "Open the story to read the full article."),
+        excerpt: stripHTML(item?.description || item?.content || "Open the story to read the full article."),
         link: item?.link || "https://cybersecuritynews.com/",
-        image: extractImageFromRSSItem(item),
+        image: item?.thumbnail || item?.enclosure?.link || extractImageFromHTML(item?.content || item?.description),
         date: item?.pubDate,
         category: item?.categories?.[0] || "Cyber Security News"
       };
+    }
+
+    function parseRSSXML(xmlText) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, "application/xml");
+      const items = [...doc.querySelectorAll("item")].slice(0, 10);
+
+      return items.map((item) => {
+        const title = item.querySelector("title")?.textContent || "Untitled story";
+        const link = item.querySelector("link")?.textContent || "https://cybersecuritynews.com/";
+        const pubDate = item.querySelector("pubDate")?.textContent || "";
+        const category = item.querySelector("category")?.textContent || "Cyber Security News";
+        const encoded = item.getElementsByTagName("content:encoded")?.[0]?.textContent || "";
+        const description = item.querySelector("description")?.textContent || encoded || "Open the story to read the full article.";
+
+        return {
+          title: decodeHTML(title),
+          excerpt: stripHTML(description),
+          link,
+          image: extractImageFromHTML(encoded || description),
+          date: pubDate,
+          category
+        };
+      });
     }
 
     function renderNews(stories) {
       if (!newsGrid || !newsStatus) return;
 
       if (!stories.length) {
-        newsStatus.textContent = "No stories could be loaded right now. Please refresh or open the source website.";
-        newsGrid.innerHTML = "";
+        showFallback("No stories could be loaded right now. Please refresh or open the source website.");
         return;
       }
 
       newsStatus.textContent = "Latest Cyber Security News stories loaded.";
       newsGrid.innerHTML = stories.map((story) => {
-        const excerpt = story.excerpt.length > 135 ? `${story.excerpt.slice(0, 135).trim()}...` : story.excerpt;
+        const cleanExcerpt = story.excerpt || "Open the story to read the full article.";
+        const excerpt = cleanExcerpt.length > 135 ? `${cleanExcerpt.slice(0, 135).trim()}...` : cleanExcerpt;
 
         return `
           <a class="news-card" href="${escapeHTML(story.link)}" target="_blank" rel="noopener noreferrer">
             <div class="news-image-wrap">
-              <img src="${escapeHTML(story.image)}" alt="${escapeHTML(story.title)}" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'" />
-              <span class="news-category">${escapeHTML(story.category)}</span>
+              <img src="${escapeHTML(story.image || FALLBACK_IMAGE)}" alt="${escapeHTML(story.title)}" loading="lazy" onerror="this.src='${FALLBACK_IMAGE}'" />
+              <span class="news-category">${escapeHTML(story.category || "Cyber Security News")}</span>
             </div>
             <div class="news-card-body">
               <h2>${escapeHTML(story.title)}</h2>
@@ -875,18 +926,38 @@
       }).join("");
     }
 
+    function showFallback(message) {
+      if (!newsGrid || !newsStatus) return;
+
+      newsStatus.textContent = message;
+      newsGrid.innerHTML = `
+        <div class="fallback-box">
+          <strong>News feed could not load inside the page.</strong>
+          This can happen when the browser blocks the request, the network is slow, or the source feed is temporarily unavailable.
+          Use the Open Source button above to view the latest stories directly.
+        </div>
+      `;
+    }
+
     async function loadFromWordPressAPI() {
-      const response = await fetch(WORDPRESS_API);
+      const response = await fetchWithTimeout(WORDPRESS_API);
       if (!response.ok) throw new Error("WordPress API failed");
       const posts = await response.json();
       return posts.map(normalizeWordPressPost);
     }
 
     async function loadFromRSSProxy() {
-      const response = await fetch(RSS_PROXY_API);
+      const response = await fetchWithTimeout(RSS_PROXY_API);
       if (!response.ok) throw new Error("RSS proxy failed");
       const data = await response.json();
       return (data.items || []).slice(0, 10).map(normalizeRSSItem);
+    }
+
+    async function loadFromAllOriginsRSS() {
+      const response = await fetchWithTimeout(ALL_ORIGINS_RSS);
+      if (!response.ok) throw new Error("AllOrigins RSS failed");
+      const xmlText = await response.text();
+      return parseRSSXML(xmlText);
     }
 
     async function loadLatestNews() {
@@ -895,424 +966,30 @@
       newsStatus.textContent = "Loading latest Cyber Security News stories...";
       newsGrid.innerHTML = "";
 
-      try {
-        const stories = await loadFromWordPressAPI();
-        renderNews(stories);
-      } catch (firstError) {
+      const loaders = [loadFromWordPressAPI, loadFromRSSProxy, loadFromAllOriginsRSS];
+      const errors = [];
+
+      for (const loader of loaders) {
         try {
-          const stories = await loadFromRSSProxy();
-          renderNews(stories);
-        } catch (secondError) {
-          newsStatus.textContent = "News could not load. Check your internet connection or open the source website.";
-          newsGrid.innerHTML = "";
+          const stories = await loader();
+          if (stories && stories.length) {
+            renderNews(stories);
+            return;
+          }
+        } catch (error) {
+          errors.push(error.message || "Unknown loading error");
         }
-        <a href="index.html">Portfolio</a>
-        <span class="crumb-dot" aria-hidden="true"></span>
-        <span>Cyber Alerts</span>
-        <span class="crumb-dot" aria-hidden="true"></span>
-        <span>News & Safety</span>
-      </div>
-
-      <span class="tag">Live Threat Feed / BeMight Security</span>
-      <h1>Cyber Alerts & Latest Security News</h1>
-      <p>
-        A practical cyber safety page for tracking common digital threats, public awareness tips, and recent
-        cybersecurity stories from Cyber Security News.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn" href="#threats">View Threat Matrix</a>
-        <a class="btn secondary" href="#latest-news">Latest News</a>
-        <a class="btn secondary" href="#report">Report Suspicious Activity</a>
-      </div>
-    </div>
-  </section>
-
-  <main class="alerts-page">
-    <div class="container">
-      <section class="section-block" aria-labelledby="feed-title">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Live Threat Feed</div>
-            <h2 id="feed-title">Current Alert Overview</h2>
-            <p>
-              Quick view of common threats affecting students, mobile money users, job seekers, and everyday internet users.
-            </p>
-          </div>
-          <span class="status-pill" id="lastUpdated">Updated today</span>
-        </div>
-
-        <div class="stats-grid">
-          <article class="stat-card">
-            <span>Critical Alerts</span>
-            <strong>2</strong>
-            <p>Immediate caution recommended.</p>
-          </article>
-
-          <article class="stat-card">
-            <span>Active Patterns</span>
-            <strong>3</strong>
-            <p>Still being reported by users.</p>
-          </article>
-
-          <article class="stat-card">
-            <span>Rising Signals</span>
-            <strong>1</strong>
-            <p>Watch closely and warn others.</p>
-          </article>
-
-          <article class="stat-card">
-            <span>News Source</span>
-            <strong>CSN</strong>
-            <p>Cyber Security News feed.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block" id="threats" aria-labelledby="threats-title">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Threat Matrix</div>
-            <h2 id="threats-title">Active Scam & Cyber Threat Alerts</h2>
-            <p>
-              Simple, practical warnings for common threats. This section is written for awareness and prevention.
-            </p>
-          </div>
-          <span class="status-pill">Ghana-focused safety</span>
-        </div>
-
-        <div class="threat-grid">
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">01</span>
-              <span class="severity critical">Critical</span>
-            </div>
-            <h3>MoMo Reversal Scam</h3>
-            <p>Scammers may call claiming they sent money by mistake and pressure you to reverse a fake transaction.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Do not rush. Check your official MoMo balance and confirm directly in the app or through official support.</p>
-              <span class="target-pill">Target: Mobile money users</span>
-            </div>
-          </article>
-
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">02</span>
-              <span class="severity critical">Critical</span>
-            </div>
-            <h3>SIM Swap Attack</h3>
-            <p>Attackers try to take over your phone number so they can receive OTPs and access sensitive accounts.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Use strong account protections, do not share OTPs, and contact your network provider quickly if your SIM stops working.</p>
-              <span class="target-pill">Target: Phone users</span>
-            </div>
-          </article>
-
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">03</span>
-              <span class="severity rising">Rising</span>
-            </div>
-            <h3>AI Voice Impersonation</h3>
-            <p>Fraudsters may imitate familiar voices to create urgency and request money or private information.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Call the person back using a trusted number and agree on a family verification phrase for emergencies.</p>
-              <span class="target-pill">Target: Families & friends</span>
-            </div>
-          </article>
-
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">04</span>
-              <span class="severity active-alert">Active</span>
-            </div>
-            <h3>Fake Job Recruitment</h3>
-            <p>Fake job offers may ask for registration fees, document uploads, or payment before an interview.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Verify the company website, check official email domains, and avoid paying money for job interviews.</p>
-              <span class="target-pill">Target: Job seekers</span>
-            </div>
-          </article>
-
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">05</span>
-              <span class="severity active-alert">Active</span>
-            </div>
-            <h3>Fake Scholarship Portal</h3>
-            <p>Fraudulent scholarship pages may collect personal details or demand application fees from students.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Use official school, embassy, or foundation websites and avoid sharing IDs with unknown pages.</p>
-              <span class="target-pill">Target: Students</span>
-            </div>
-          </article>
-
-          <article class="threat-card">
-            <div class="threat-top">
-              <span class="threat-number">06</span>
-              <span class="severity stable">Monitored</span>
-            </div>
-            <h3>WhatsApp Account Takeover</h3>
-            <p>Attackers may trick users into sharing verification codes so they can take over WhatsApp accounts.</p>
-            <div class="what-to-do">
-              <strong>What to do now</strong>
-              <p>Never share verification codes and turn on two-step verification inside WhatsApp settings.</p>
-              <span class="target-pill">Target: WhatsApp users</span>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block" id="safety" aria-labelledby="safety-title">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Protection Guide</div>
-            <h2 id="safety-title">Quick Cyber Safety Actions</h2>
-            <p>Small habits that reduce risk for students, families, and small businesses.</p>
-          </div>
-        </div>
-
-        <div class="two-col">
-          <article class="mini-panel">
-            <h3>Before You Click or Pay</h3>
-            <ul>
-              <li>Check the real website address before entering personal details.</li>
-              <li>Do not share OTPs, PINs, recovery codes, or card details with anyone.</li>
-              <li>Pause when a message creates fear, pressure, or urgency.</li>
-              <li>Confirm money requests through a second trusted contact method.</li>
-            </ul>
-          </article>
-
-          <article class="mini-panel report-card" id="report">
-            <h3>Seen Something Suspicious?</h3>
-            <p>
-              Report suspicious links, fake job offers, MoMo scam attempts, or account takeover messages. Your report can help
-              create better awareness for others.
-            </p>
-            <a class="btn" href="mailto:contact.bemightsec@gmail.com?subject=Suspicious%20Activity%20Report%20-%20BeMight%20Security">Report by Email</a>
-          </article>
-        </div>
-      </section>
-
-      <section class="section-block" id="latest-news" aria-labelledby="news-title">
-        <div class="section-head">
-          <div>
-            <div class="section-kicker">Latest Cyber News</div>
-            <h2 id="news-title">Cyber Security News Feed</h2>
-            <p>
-              Recent stories are displayed from Cyber Security News in a clean BeMight Security layout with images.
-            </p>
-          </div>
-        </div>
-
-        <div class="news-controls">
-          <div class="news-source">
-            <strong>Source:</strong> Cyber Security News • auto-loaded public posts
-          </div>
-          <div class="news-actions">
-            <button class="news-refresh" type="button" id="refreshNews">Refresh News</button>
-            <a class="source-link" href="https://cybersecuritynews.com/" target="_blank" rel="noopener noreferrer">Open Source</a>
-          </div>
-        </div>
-
-        <p class="news-status" id="newsStatus">Loading latest stories...</p>
-        <div class="news-grid" id="newsGrid" aria-live="polite"></div>
-      </section>
-
-      <section class="cta-banner" aria-labelledby="cta-title">
-        <h2 id="cta-title">Turn Cyber Awareness Into Everyday Protection</h2>
-        <p>
-          Follow BeMight Security for practical tips, safer digital habits, and beginner-friendly cybersecurity education.
-        </p>
-        <div class="hero-actions">
-          <a class="btn" href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">Join WhatsApp Channel</a>
-          <a class="btn secondary" href="index.html#projects">View Portfolio Projects</a>
-        </div>
-      </section>
-    </div>
-  </main>
-
-  <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
-
-  <footer class="site-footer">
-    <div class="container footer-row">
-      <div>© 2026 BeMight Security. All rights reserved.</div>
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="index.html#about">About</a>
-        <a href="index.html#projects">Projects</a>
-        <a href="news.html">Alerts</a>
-        <a href="index.html#tools">Tools</a>
-        <a href="index.html#certifications">Certifications</a>
-        <a href="index.html#contact">Contact</a>
-      </nav>
-    </div>
-  </footer>
-
-  <script>
-    const menuButton = document.querySelector(".menu-btn");
-    const siteNav = document.getElementById("site-nav");
-    const navLinks = [...document.querySelectorAll(".site-nav a")];
-    const backToTop = document.getElementById("backToTop");
-    const newsGrid = document.getElementById("newsGrid");
-    const newsStatus = document.getElementById("newsStatus");
-    const refreshNews = document.getElementById("refreshNews");
-    const lastUpdated = document.getElementById("lastUpdated");
-
-    const WORDPRESS_API = "https://cybersecuritynews.com/wp-json/wp/v2/posts?_embed=wp:featuredmedia,wp:term&per_page=9";
-    const RSS_PROXY_API = "https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fcybersecuritynews.com%2Ffeed%2F";
-    const FALLBACK_IMAGE = "securitylogo.png";
-
-    function setMenu(open) {
-      if (!siteNav || !menuButton) return;
-      siteNav.classList.toggle("show", open);
-      menuButton.setAttribute("aria-expanded", String(open));
-    }
-
-    if (menuButton && siteNav) {
-      menuButton.addEventListener("click", (event) => {
-        event.stopPropagation();
-        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
-        setMenu(!isOpen);
-      });
-
-      siteNav.addEventListener("click", (event) => {
-        event.stopPropagation();
-      });
-
-      navLinks.forEach((link) => {
-        link.addEventListener("click", () => {
-          if (window.innerWidth <= 860) setMenu(false);
-        });
-      });
-
-      document.addEventListener("click", (event) => {
-        const isMenuOpen = siteNav.classList.contains("show");
-        if (!isMenuOpen) return;
-
-        const clickedInsideMenu = siteNav.contains(event.target);
-        const clickedButton = menuButton.contains(event.target);
-
-        if (!clickedInsideMenu && !clickedButton) {
-          setMenu(false);
-        }
-      });
-
-      window.addEventListener("resize", () => {
-        if (window.innerWidth > 860) setMenu(false);
-      });
-
-      window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") setMenu(false);
-      });
-    }
-
-    if (backToTop) {
-      window.addEventListener("scroll", () => {
-        if (window.scrollY > 300) {
-          backToTop.classList.add("show");
-        } else {
-          backToTop.classList.remove("show");
-        }
-      });
-    }
-
-    if (lastUpdated) {
-      const now = new Date();
-      lastUpdated.textContent = `Updated ${now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}`;
-    }
-
-    function decodeHTML(html) {
-      const textarea = document.createElement("textarea");
-      textarea.innerHTML = html || "";
-      return textarea.value;
-    }
-
-    function stripHTML(html) {
-      const div = document.createElement("div");
-      div.innerHTML = html || "";
-      return div.textContent || div.innerText || "";
-    }
-
-    function escapeHTML(value) {
-      return String(value || "").replace(/[&<>'"]/g, (char) => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "'": "&#39;",
-        "\"": "&quot;"
-      }[char]));
-    }
-
-    function formatDate(dateValue) {
-      if (!dateValue) return "Recent";
-      const date = new Date(dateValue);
-      if (Number.isNaN(date.getTime())) return "Recent";
-
-      return date.toLocaleDateString(undefined, {
-        year: "numeric",
-        month: "short",
-        day: "numeric"
-      });
-    }
-
-    function getFeaturedImage(post) {
-      const media = post?._embedded?.["wp:featuredmedia"]?.[0];
-      return (
-        media?.media_details?.sizes?.medium_large?.source_url ||
-        media?.media_details?.sizes?.large?.source_url ||
-        media?.source_url ||
-        FALLBACK_IMAGE
-      );
-    }
-
-    function getCategory(post) {
-      const terms = post?._embedded?.["wp:term"]?.flat?.() || [];
-      const category = terms.find((term) => term.taxonomy === "category");
-      return category?.name || "Cybersecurity";
-    }
-
-    function normalizeWordPressPost(post) {
-      return {
-        title: decodeHTML(post?.title?.rendered || "Untitled story"),
-        excerpt: stripHTML(post?.excerpt?.rendered || "Open the story to read the full article."),
-        link: post?.link || "https://cybersecuritynews.com/",
-        image: getFeaturedImage(post),
-        date: post?.date,
-        category: getCategory(post)
-      };
-    }
-
-    function extractImageFromRSSItem(item) {
-      const html = item?.content || item?.description || "";
-      const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
-      return item?.thumbnail || item?.enclosure?.link || match?.[1] || FALLBACK_IMAGE;
-    }
-
-    function normalizeRSSItem(item) {
-      return {
-        title: decodeHTML(item?.title || "Untitled story"),
-        excerpt: stripHTML(item?.description || "Open the story to read the full article."),
-        link: item?.link || "https://cybersecuritynews.com/",
-        image: extractImageFromRSSItem(item),
-        date: item?.pubDate,
-        category: item?.categories?.[0] || "Cybersecurity"
-      };
-    }
-
-    function renderNews(stories) {
-      if (!newsGrid || !newsStatus) return;
-
-      if (!stories.length) {
-        newsStatus.textContent = "No stories could be loaded right now. Please refresh or open the source website.";
-        newsGrid.innerHTML = "";
-        return;
       }
 
-      newsStatus.textContent = "Latest Cyber Security News stories loaded.";
-      newsGrid.innerHTML = stories.map((story) => {
-        const excerpt = sto
+      console.warn("News loading failed:", errors);
+      showFallback("News could not load. Check your internet connection or open the source website.");
+    }
+
+    if (refreshNews) {
+      refreshNews.addEventListener("click", loadLatestNews);
+    }
+
+    loadLatestNews();
+  </script>
+</body>
+</html>
