@@ -1,20 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BeMight | Cybersecurity Portfolio</title>
   <link rel="icon" type="image/png" sizes="32x32" href="fav.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&display=swap" rel="stylesheet">
   <meta
     name="description"
     content="BeMight - Junior Cybersecurity Analyst portfolio focused on threat detection, network security, digital protection, projects, tools, and certifications."
   />
-  <meta name="theme-color" content="#07100d" />
-
-  <style>
+  <meta name="theme-color" content="#07100d" />  <style>
     :root {
       --bg: #07100d;
       --bg-2: #0a1511;
@@ -154,16 +148,13 @@
       flex: 0 0 auto;
     }
 
-   .brand-text strong {
-  display: block;
-  color: #fff;
-  font-family: "Orbitron", "Segoe UI", sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
+    .brand-text strong {
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
 
     .brand-text span {
       display: block;
@@ -274,25 +265,26 @@
     }
 
     .hero-name {
-  display: block;
-  text-align: center;
-  color: #fff;
-  font-family: "Orbitron", "Segoe UI", sans-serif;
-  font-size: clamp(1.35rem, 3.2vw, 2.45rem);
-  font-weight: 700;
-  line-height: 1.15;
-  letter-spacing: 0.02em;
-  margin-bottom: 8px;
-  opacity: 0.92;
+      display: block;
+      text-align: center;
+      color: #fff;
+      font-family: "Orbitron", "Segoe UI", sans-serif;
+      font-size: clamp(1.35rem, 3.2vw, 2.45rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+      opacity: 0.92;
     }
 
     .hero-role {
       display: block;
       text-align: center;
       color: #fff;
-      font-size: clamp(1.65rem, 4.5vw, 3.7rem);
-      line-height: 1.05;
-      letter-spacing: -0.055em;
+      font-size: clamp(1.35rem, 3.6vw, 2.65rem);
+      font-weight: 750;
+      line-height: 1.08;
+      letter-spacing: -0.035em;
       white-space: nowrap;
     }
 
@@ -688,6 +680,92 @@
       text-underline-offset: 4px;
     }
 
+    .news-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+      padding: 14px;
+      border: 1px solid rgba(17, 26, 21, 0.08);
+      border-radius: 18px;
+      background: #fffdf7;
+    }
+
+    .news-source {
+      color: #53665c;
+      font-size: 0.9rem;
+      font-weight: 750;
+    }
+
+    .news-source strong {
+      color: #165936;
+    }
+
+    .news-refresh {
+      min-height: 38px;
+      padding: 0 13px;
+      border: 0;
+      border-radius: 999px;
+      color: #07100d;
+      background: var(--green);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .news-status {
+      margin-top: 16px;
+      color: #53665c;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .news-grid {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .news-card {
+      display: block;
+      padding: 16px;
+      border: 1px solid rgba(17, 26, 21, 0.09);
+      border-radius: 20px;
+      background: #fffdf7;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(50, 212, 125, 0.45);
+      box-shadow: 0 18px 30px rgba(17, 26, 21, 0.1);
+    }
+
+    .news-card h3 {
+      margin-bottom: 10px;
+    }
+
+    .news-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .news-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      color: #165936;
+      background: #e7f7ec;
+      border: 1px solid rgba(22, 89, 54, 0.08);
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
     .skill-grid,
     .cert-grid {
       display: grid;
@@ -983,13 +1061,13 @@
       }
 
       .hero-name {
-        font-size: clamp(2.4rem, 16vw, 4rem);
-        letter-spacing: -0.065em;
+        font-size: clamp(1.35rem, 7vw, 2rem);
+        letter-spacing: 0.02em;
       }
 
       .hero-role {
-        font-size: clamp(1.42rem, 8.2vw, 2.6rem);
-        letter-spacing: -0.055em;
+        font-size: clamp(1.15rem, 6.4vw, 2rem);
+        letter-spacing: -0.03em;
         white-space: nowrap;
       }
 
@@ -1025,7 +1103,7 @@
 
     @media (max-width: 400px) {
       .hero-role {
-        font-size: clamp(1.2rem, 7.6vw, 1.75rem);
+        font-size: clamp(1rem, 6.2vw, 1.45rem);
       }
 
       .typing::after {
@@ -1033,36 +1111,29 @@
         margin-left: 5px;
       }
     }
-  </style>
-</head>
-
-<body>
+  </style></head><body>
   <a class="skip-link" href="#main-content">Skip to content</a>
-  <div class="top-accent" aria-hidden="true"></div>
-
-  <header class="site-header">
+  <div class="top-accent" aria-hidden="true"></div>  <header class="site-header">
     <div class="container header-row">
       <a class="brand" href="#home" aria-label="BeMight homepage">
-        <img class="brand-logo" src="fav.png" alt="BeMight Security logo" />
+        <img class="brand-logo" src="securitylogo.png" alt="BeMight Security logo" />
         <span class="brand-text">
           <strong>BeMight</strong>
           <span>Cybersecurity Portfolio</span>
         </span>
-      </a>
+      </a><button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
 
-      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#news">News</a>
+    <a href="#tools">Tools</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</div>
 
-      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#tools">Tools</a>
-        <a href="#certifications">Certifications</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </div>
-  </header>
-
-  <section class="hero" id="home">
+  </header>  <section class="hero" id="home">
     <div class="container hero-grid">
       <div class="hero-copy reveal">
         <div class="crumbs" aria-label="Page location">
@@ -1071,75 +1142,73 @@
           <span>Cybersecurity</span>
           <span class="crumb-dot" aria-hidden="true"></span>
           <span>Junior Analyst</span>
-        </div>
+        </div><span class="tag">Learning Path / Practical Security</span>
 
-        <span class="tag">Learning Path / Practical Security</span>
+    <h1 class="hero-title">
+      <span class="hero-name">BeMight</span>
+      <span class="hero-role">
+        <span class="typing" data-text="Cybersecurity Portfolio" aria-label="Cybersecurity Portfolio"></span>
+      </span>
+    </h1>
 
-        <h1 class="hero-title">
-          <span class="hero-name">BeMight</span>
-          <span class="hero-role">
-            <span class="typing" data-text="Cybersecurity Portfolio" aria-label="Cybersecurity Portfolio"></span>
-          </span>
-        </h1>
+    <p class="hero-lead">
+      A clean proof-of-work portfolio documenting my cybersecurity journey, practical labs, security tools practice,
+      and growing skills in threat detection, network security, and digital protection.
+    </p>
 
-        <p class="hero-lead">
-          A clean proof-of-work portfolio documenting my cybersecurity journey, practical labs, security tools practice,
-          and growing skills in threat detection, network security, and digital protection.
-        </p>
+    <div class="meta-row" aria-label="Portfolio meta information">
+      <span class="meta-pill">Updated: 2026</span>
+      <span class="meta-pill">Prince Awuku Anobaah</span>
+      <span class="meta-pill">Junior Cybersecurity Analyst</span>
+    </div>
 
-        <div class="meta-row" aria-label="Portfolio meta information">
-          <span class="meta-pill">Updated: 2026</span>
-          <span class="meta-pill">Prince Awuku Anobaah</span>
-          <span class="meta-pill">Junior Cybersecurity Analyst</span>
-        </div>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#projects">View Projects</a>
+      <a class="btn btn-secondary" href="#contact">Let’s Connect</a>
+    </div>
+  </div>
 
-        <div class="hero-actions">
-          <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="#contact">Let’s Connect</a>
+  <aside class="hero-card reveal delay-1" aria-label="Portfolio summary">
+    <div class="profile-top">
+      <div class="profile-row">
+        <img src="profile.png" alt="Prince Awuku Anobaah" />
+        <div>
+          <strong>BeMight</strong>
+          <span>Junior Cybersecurity Analyst</span>
         </div>
       </div>
-
-      <aside class="hero-card reveal delay-1" aria-label="Portfolio summary">
-        <div class="profile-top">
-          <div class="profile-row">
-            <img src="profile.png" alt="Prince Awuku Anobaah" />
-            <div>
-              <strong>BeMight</strong>
-              <span>Junior Cybersecurity Analyst</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="profile-body">
-          <h2 class="mini-title">On this page</h2>
-          <nav class="toc" aria-label="Page sections">
-            <a href="#about">Who I Am <span>01</span></a>
-            <a href="#projects">Projects & Labs <span>02</span></a>
-            <a href="#tools">Tools & Skills <span>03</span></a>
-            <a href="#certifications">Learning <span>04</span></a>
-            <a href="#contact">Contact <span>05</span></a>
-          </nav>
-
-          <div class="profile-stats" aria-label="Portfolio highlights">
-            <div class="profile-stat">
-              <strong>3+</strong>
-              <span>Labs</span>
-            </div>
-            <div class="profile-stat">
-              <strong>6</strong>
-              <span>Tools</span>
-            </div>
-            <div class="profile-stat">
-              <strong>1</strong>
-              <span>Mission</span>
-            </div>
-          </div>
-        </div>
-      </aside>
     </div>
-  </section>
 
-  <main id="main-content">
+    <div class="profile-body">
+      <h2 class="mini-title">On this page</h2>
+      <nav class="toc" aria-label="Page sections">
+        <a href="#about">Who I Am <span>01</span></a>
+        <a href="#projects">Projects & Labs <span>02</span></a>
+        <a href="#news">Latest News <span>03</span></a>
+        <a href="#tools">Tools & Skills <span>04</span></a>
+        <a href="#certifications">Learning <span>05</span></a>
+        <a href="#contact">Contact <span>06</span></a>
+      </nav>
+
+      <div class="profile-stats" aria-label="Portfolio highlights">
+        <div class="profile-stat">
+          <strong>3+</strong>
+          <span>Labs</span>
+        </div>
+        <div class="profile-stat">
+          <strong>6</strong>
+          <span>Tools</span>
+        </div>
+        <div class="profile-stat">
+          <strong>1</strong>
+          <span>Mission</span>
+        </div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+  </section>  <main id="main-content">
     <div class="container content-layout">
       <div class="article-flow">
         <section id="about" class="article-section reveal" aria-labelledby="about-title">
@@ -1152,269 +1221,281 @@
           <p>
             My goal is to grow into a strong cybersecurity professional who can help people and organisations understand,
             detect, and reduce digital risks.
-          </p>
+          </p><div class="profile-image-block">
+        <img class="portrait" src="profile.png" alt="Prince Awuku Anobaah" loading="eager" />
+        <div>
+          <div class="quote-box">
+            Cybersecurity is not just a technical skill. It is a responsibility to protect people, systems, and data.
+          </div>
+          <div class="chips" aria-label="Focus areas">
+            <span class="chip">Threat Detection</span>
+            <span class="chip">Network Security</span>
+            <span class="chip">Digital Protection</span>
+            <span class="chip">Security Awareness</span>
+            <span class="chip">Hands-on Labs</span>
+          </div>
+        </div>
+      </div>
+    </section>
 
-          <div class="profile-image-block">
-            <img class="portrait" src="profile.png" alt="Prince Awuku Anobaah" loading="eager" />
-            <div>
-              <div class="quote-box">
-                Cybersecurity is not just a technical skill. It is a responsibility to protect people, systems, and data.
-              </div>
-              <div class="chips" aria-label="Focus areas">
-                <span class="chip">Threat Detection</span>
-                <span class="chip">Network Security</span>
-                <span class="chip">Digital Protection</span>
-                <span class="chip">Security Awareness</span>
-                <span class="chip">Hands-on Labs</span>
-              </div>
+    <section id="projects" class="article-section reveal" aria-labelledby="projects-title">
+      <div class="section-kicker">Section 02</div>
+      <h2 id="projects-title">Projects & Labs</h2>
+      <p>
+        These projects show practical learning, not just theory. Each one should help visitors understand what I
+        practiced, which tools I used, and what I learned from the work.
+      </p>
+
+      <div class="list-grid">
+        <a href="network-traffic-analysis.html" class="lab-card" aria-label="Open Network Traffic Analysis Lab">
+          <img src="project-traffic.jpg" alt="Network traffic analysis project" loading="lazy" />
+          <div>
+            <h3>1. Network Traffic Analysis Lab</h3>
+            <div class="lab-meta">
+              <span class="lab-pill">Best for: Analysis</span>
+              <span class="lab-pill">Tool: Wireshark</span>
+              <span class="lab-pill">Focus: Detection</span>
             </div>
+            <p>
+              Analyzed packet captures to identify suspicious traffic, review network behavior, and document findings
+              from a simulated security environment.
+            </p>
+            <span class="open-link">Open project →</span>
           </div>
-        </section>
+        </a>
 
-        <section id="projects" class="article-section reveal" aria-labelledby="projects-title">
-          <div class="section-kicker">Section 02</div>
-          <h2 id="projects-title">Projects & Labs</h2>
-          <p>
-            These projects show practical learning, not just theory. Each one should help visitors understand what I
-            practiced, which tools I used, and what I learned from the work.
-          </p>
-
-          <div class="list-grid">
-            <a href="network-traffic-analysis.html" class="lab-card" aria-label="Open Network Traffic Analysis Lab">
-              <img src="project-traffic.jpg" alt="Network traffic analysis project" loading="lazy" />
-              <div>
-                <h3>1. Network Traffic Analysis Lab</h3>
-                <div class="lab-meta">
-                  <span class="lab-pill">Best for: Analysis</span>
-                  <span class="lab-pill">Tool: Wireshark</span>
-                  <span class="lab-pill">Focus: Detection</span>
-                </div>
-                <p>
-                  Analyzed packet captures to identify suspicious traffic, review network behavior, and document findings
-                  from a simulated security environment.
-                </p>
-                <span class="open-link">Open project →</span>
-              </div>
-            </a>
-
-            <a
-              href="https://docs.google.com/presentation/d/1bZ5p-kXjyngknw12JotNZ3lIN7X1tBro/edit?usp=sharing&ouid=112496117602264797179&rtpof=true&sd=true"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="lab-card"
-              aria-label="Open Phishing Awareness Project in a new tab"
-            >
-              <img src="project-phishing.jpg" alt="Phishing awareness project" loading="lazy" />
-              <div>
-                <h3>2. Phishing Awareness Project</h3>
-                <div class="lab-meta">
-                  <span class="lab-pill">Best for: Awareness</span>
-                  <span class="lab-pill">Format: Presentation</span>
-                  <span class="lab-pill">Focus: Users</span>
-                </div>
-                <p>
-                  Created a cybersecurity awareness presentation explaining phishing attacks, social engineering risks,
-                  warning signs, and safer digital practices.
-                </p>
-                <span class="open-link">Open presentation →</span>
-              </div>
-            </a>
-
-            <a href="dns-enumeration.html" class="lab-card" aria-label="Open DNS Enumeration Lab">
-              <img src="project-dns.jpg" alt="DNS enumeration lab" loading="lazy" />
-              <div>
-                <h3>3. DNS Enumeration Lab</h3>
-                <div class="lab-meta">
-                  <span class="lab-pill">Best for: Recon</span>
-                  <span class="lab-pill">Tools: dig / nslookup</span>
-                  <span class="lab-pill">Focus: DNS</span>
-                </div>
-                <p>
-                  Practiced information gathering by reviewing DNS records and domain infrastructure using common
-                  reconnaissance tools.
-                </p>
-                <span class="open-link">Open lab →</span>
-              </div>
-            </a>
+        <a
+          href="https://docs.google.com/presentation/d/1bZ5p-kXjyngknw12JotNZ3lIN7X1tBro/edit?usp=sharing&ouid=112496117602264797179&rtpof=true&sd=true"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="lab-card"
+          aria-label="Open Phishing Awareness Project in a new tab"
+        >
+          <img src="project-phishing.jpg" alt="Phishing awareness project" loading="lazy" />
+          <div>
+            <h3>2. Phishing Awareness Project</h3>
+            <div class="lab-meta">
+              <span class="lab-pill">Best for: Awareness</span>
+              <span class="lab-pill">Format: Presentation</span>
+              <span class="lab-pill">Focus: Users</span>
+            </div>
+            <p>
+              Created a cybersecurity awareness presentation explaining phishing attacks, social engineering risks,
+              warning signs, and safer digital practices.
+            </p>
+            <span class="open-link">Open presentation →</span>
           </div>
-        </section>
+        </a>
 
-        <section id="tools" class="article-section reveal" aria-labelledby="tools-title">
-          <div class="section-kicker">Section 03</div>
-          <h2 id="tools-title">Tools & Skills</h2>
-          <p>
-            My toolkit is focused on building a strong foundation for practical security work, especially defensive
-            analysis, networking, Linux, and safe documentation.
-          </p>
-
-          <div class="skill-grid">
-            <article class="mini-card">
-              <span class="mini-label">Security Tools</span>
-              <h3>Tools I Practice With</h3>
-              <ul class="bullet-list">
-                <li>Wireshark</li>
-                <li>Nmap</li>
-                <li>TCPdump</li>
-                <li>Nikto</li>
-                <li>OpenVAS</li>
-                <li>Subfinder</li>
-              </ul>
-            </article>
-
-            <article class="mini-card">
-              <span class="mini-label">Skill Focus</span>
-              <h3>Areas I Am Building</h3>
-              <ul class="bullet-list">
-                <li>Threat detection</li>
-                <li>Network security fundamentals</li>
-                <li>Linux command line</li>
-                <li>Digital protection</li>
-                <li>Security awareness</li>
-                <li>Technical documentation</li>
-              </ul>
-            </article>
+        <a href="dns-enumeration.html" class="lab-card" aria-label="Open DNS Enumeration Lab">
+          <img src="project-dns.jpg" alt="DNS enumeration lab" loading="lazy" />
+          <div>
+            <h3>3. DNS Enumeration Lab</h3>
+            <div class="lab-meta">
+              <span class="lab-pill">Best for: Recon</span>
+              <span class="lab-pill">Tools: dig / nslookup</span>
+              <span class="lab-pill">Focus: DNS</span>
+            </div>
+            <p>
+              Practiced information gathering by reviewing DNS records and domain infrastructure using common
+              reconnaissance tools.
+            </p>
+            <span class="open-link">Open lab →</span>
           </div>
-        </section>
+        </a>
+      </div>
+    </section>
 
-        <section id="certifications" class="article-section reveal" aria-labelledby="certifications-title">
-          <div class="section-kicker">Section 04</div>
-          <h2 id="certifications-title">Learning & Development</h2>
-          <p>
-            This section highlights certificates and structured learning that support my cybersecurity growth and show
-            continuous improvement.
-          </p>
+    <section id="news" class="article-section reveal" aria-labelledby="news-title">
+      <div class="section-kicker">Section 03</div>
+      <h2 id="news-title">Latest Tech & Cyber News</h2>
+      <p>
+        A live section that pulls recent technology and cybersecurity-related stories. This helps the portfolio feel
+        active and also shows that I follow what is happening in the tech and security space.
+      </p>
 
-          <div class="cert-grid">
-            <article class="mini-card">
-              <span class="mini-label">Completed</span>
-              <h3>Introduction to Cybersecurity</h3>
-              <p>Cisco Networking Academy</p>
-            </article>
-
-            <article class="mini-card">
-              <span class="mini-label">Completed</span>
-              <h3>Professional Foundations</h3>
-              <p>ALX Africa</p>
-            </article>
-
-            <article class="mini-card">
-              <span class="mini-label">Completed</span>
-              <h3>Cybersecurity Learning Journey</h3>
-              <p>Structured hands-on training and self-driven practice.</p>
-            </article>
-
-            <article class="mini-card">
-              <span class="mini-label">Ongoing</span>
-              <h3>BTech ICT</h3>
-              <p>Koforidua Technical University</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="contact" class="article-section reveal" aria-labelledby="contact-title">
-          <div class="section-kicker">Section 05</div>
-          <h2 id="contact-title">Contact & Availability</h2>
-          <p>
-            I am open to internships, collaborations, cybersecurity learning opportunities, and projects that help build
-            practical digital protection skills.
-          </p>
-
-          <div class="skill-grid">
-            <article class="mini-card">
-              <span class="mini-label">Direct Links</span>
-              <h3>Let’s Connect</h3>
-              <ul class="bullet-list">
-                <li><a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                <li><a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-                <li><a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">WhatsApp Channel</a></li>
-              </ul>
-            </article>
-
-            <article class="mini-card">
-              <span class="mini-label">Available</span>
-              <h3>Contact & Opportunities</h3>
-              <p>
-                Currently building practical cybersecurity experience through projects, labs, tools practice, and clear
-                documentation.
-              </p>
-              <div class="hero-actions">
-                <a class="btn btn-primary" href="mailto:contact.bemightsec@gmail.com">Send Email</a>
-                <a class="btn btn-secondary" href="#projects">View Projects</a>
-              </div>
-            </article>
-          </div>
-        </section>
-
-        <section class="cta-banner reveal" aria-labelledby="cta-title">
-          <h2 id="cta-title">Let’s Secure Your Digital World</h2>
-          <p>
-            Protecting systems, building skills, and growing with purpose through practical cybersecurity learning.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="mailto:contact.bemightsec@gmail.com">Contact BeMight</a>
-          </div>
-        </section>
+      <div class="news-head">
+        <div class="news-source">
+          Source: <strong>Hacker News public API</strong> • filtered for security and technology topics
+        </div>
+        <button class="news-refresh" type="button" id="refreshNews">Refresh News</button>
       </div>
 
-      <aside class="side-stack" aria-label="Supporting information">
-        <section class="side-panel">
-          <div class="side-panel-top"></div>
-          <div class="side-panel-body">
-            <h3>Current Focus</h3>
-            <ul>
-              <li>Threat detection and traffic review</li>
-              <li>Network security fundamentals</li>
-              <li>Security awareness and user protection</li>
-              <li>Hands-on documentation</li>
-            </ul>
-          </div>
-        </section>
+      <p class="news-status" id="newsStatus">Loading latest stories...</p>
+      <div class="news-grid" id="newsGrid" aria-live="polite"></div>
+    </section>
 
-       <!-- <section class="side-panel">
-          <div class="side-panel-top"></div>
-          <div class="side-panel-body">
-            <h3>Portfolio Style</h3>
-            <p>
-              Built as a cybersecurity proof-of-work page with an article-style layout, sticky navigation, readable
-              sections, and clear project summaries.
-            </p>
-          </div>
-        </section>
-         -->
+    <section id="tools" class="article-section reveal" aria-labelledby="tools-title">
+      <div class="section-kicker">Section 04</div>
+      <h2 id="tools-title">Tools & Skills</h2>
+      <p>
+        My toolkit is focused on building a strong foundation for practical security work, especially defensive
+        analysis, networking, Linux, and safe documentation.
+      </p>
 
-        <section class="side-panel">
-          <div class="side-panel-top"></div>
-          <div class="side-panel-body">
-            <h3>Find Me Online</h3>
-            <div class="share-row">
-              <a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-              <a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a>
-              <a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">Channel</a>
-            </div>
-          </div>
-        </section>
-      </aside>
-    </div>
-  </main>
+      <div class="skill-grid">
+        <article class="mini-card">
+          <span class="mini-label">Security Tools</span>
+          <h3>Tools I Practice With</h3>
+          <ul class="bullet-list">
+            <li>Wireshark</li>
+            <li>Nmap</li>
+            <li>TCPdump</li>
+            <li>Nikto</li>
+            <li>OpenVAS</li>
+            <li>Subfinder</li>
+          </ul>
+        </article>
 
-  <a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+        <article class="mini-card">
+          <span class="mini-label">Skill Focus</span>
+          <h3>Areas I Am Building</h3>
+          <ul class="bullet-list">
+            <li>Threat detection</li>
+            <li>Network security fundamentals</li>
+            <li>Linux command line</li>
+            <li>Digital protection</li>
+            <li>Security awareness</li>
+            <li>Technical documentation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="certifications" class="article-section reveal" aria-labelledby="certifications-title">
+      <div class="section-kicker">Section 05</div>
+      <h2 id="certifications-title">Learning & Development</h2>
+      <p>
+        This section highlights certificates and structured learning that support my cybersecurity growth and show
+        continuous improvement.
+      </p>
+
+      <div class="cert-grid">
+        <article class="mini-card">
+          <span class="mini-label">Completed</span>
+          <h3>Introduction to Cybersecurity</h3>
+          <p>Cisco Networking Academy</p>
+        </article>
+
+        <article class="mini-card">
+          <span class="mini-label">Completed</span>
+          <h3>Professional Foundations</h3>
+          <p>ALX Africa</p>
+        </article>
+
+        <article class="mini-card">
+          <span class="mini-label">Completed</span>
+          <h3>Cybersecurity Learning Journey</h3>
+          <p>Structured hands-on training and self-driven practice.</p>
+        </article>
+
+        <article class="mini-card">
+          <span class="mini-label">Ongoing</span>
+          <h3>BTech ICT</h3>
+          <p>Koforidua Technical University</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact" class="article-section reveal" aria-labelledby="contact-title">
+      <div class="section-kicker">Section 06</div>
+      <h2 id="contact-title">Contact & Availability</h2>
+      <p>
+        I am open to internships, collaborations, cybersecurity learning opportunities, and projects that help build
+        practical digital protection skills.
+      </p>
+
+      <div class="skill-grid">
+        <article class="mini-card">
+          <span class="mini-label">Direct Links</span>
+          <h3>Let’s Connect</h3>
+          <ul class="bullet-list">
+            <li><a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">WhatsApp Channel</a></li>
+          </ul>
+        </article>
+
+        <article class="mini-card">
+          <span class="mini-label">Available</span>
+          <h3>Contact & Opportunities</h3>
+          <p>
+            Currently building practical cybersecurity experience through projects, labs, tools practice, and clear
+            documentation.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:contact.bemightsec@gmail.com">Send Email</a>
+            <a class="btn btn-secondary" href="#projects">View Projects</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cta-banner reveal" aria-labelledby="cta-title">
+      <h2 id="cta-title">Let’s Secure Your Digital World</h2>
+      <p>
+        Protecting systems, building skills, and growing with purpose through practical cybersecurity learning.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="mailto:contact.bemightsec@gmail.com">Contact BeMight</a>
+      </div>
+    </section>
+  </div>
+
+  <aside class="side-stack" aria-label="Supporting information">
+    <section class="side-panel">
+      <div class="side-panel-top"></div>
+      <div class="side-panel-body">
+        <h3>Current Focus</h3>
+        <ul>
+          <li>Threat detection and traffic review</li>
+          <li>Network security fundamentals</li>
+          <li>Security awareness and user protection</li>
+          <li>Hands-on documentation</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="side-panel">
+      <div class="side-panel-top"></div>
+      <div class="side-panel-body">
+        <h3>Portfolio Style</h3>
+        <p>
+          Built as a cybersecurity proof-of-work page with an article-style layout, sticky navigation, readable
+          sections, and clear project summaries.
+        </p>
+      </div>
+    </section>
+
+    <section class="side-panel">
+      <div class="side-panel-top"></div>
+      <div class="side-panel-body">
+        <h3>Find Me Online</h3>
+        <div class="share-row">
+          <a href="https://www.linkedin.com/in/bemight" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://www.youtube.com/@BeMightSecurity" target="_blank" rel="noopener noreferrer">YouTube</a>
+          <a href="https://whatsapp.com/channel/0029VaHqXRa84Om5CcZx2o13" target="_blank" rel="noopener noreferrer">Channel</a>
+        </div>
+      </div>
+    </section>
+  </aside>
+</div>
+
+  </main><a href="#home" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
 
   <footer class="site-footer">
     <div class="container footer-row">
-      <div>© 2026 BeMight Security | Prince Awuku Anobaah.</div>
-      <div>All rights reserved.</div>
+      <div>© 2026 BeMight. All rights reserved.</div>
       <nav class="footer-nav" aria-label="Footer navigation">
         <a href="#about">About</a>
         <a href="#projects">Projects</a>
+        <a href="#news">News</a>
         <a href="#tools">Tools</a>
         <a href="#certifications">Certifications</a>
         <a href="#contact">Contact</a>
       </nav>
     </div>
-  </div>
-  </footer>
-
-  <script>
+  </footer>  <script>
     const typingElement = document.querySelector(".typing");
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -1449,6 +1530,9 @@
     const allTrackedLinks = [...navLinks, ...tocLinks];
     const sections = [...document.querySelectorAll("main section[id], .hero[id]")];
     const backToTop = document.getElementById("backToTop");
+    const newsGrid = document.getElementById("newsGrid");
+    const newsStatus = document.getElementById("newsStatus");
+    const refreshNews = document.getElementById("refreshNews");
 
     function setMenu(open) {
       if (!siteNav || !menuButton) return;
@@ -1504,6 +1588,112 @@
       });
     }
 
+    const securityKeywords = [
+      "security", "cyber", "breach", "vulnerability", "malware", "ransomware", "phishing",
+      "privacy", "encryption", "zero day", "zero-day", "cve", "exploit", "hack", "hacker",
+      "data leak", "authentication", "password", "microsoft", "linux", "ai", "cloud"
+    ];
+
+    function escapeHTML(value) {
+      return String(value || "").replace(/[&<>'"]/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        "\"": "&quot;"
+      }[char]));
+    }
+
+    function getDomain(url) {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return "news.ycombinator.com";
+      }
+    }
+
+    function timeAgo(unixTime) {
+      if (!unixTime) return "Recent";
+      const seconds = Math.floor(Date.now() / 1000 - unixTime);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      if (days > 0) return `${days}d ago`;
+      if (hours > 0) return `${hours}h ago`;
+      if (minutes > 0) return `${minutes}m ago`;
+      return "Just now";
+    }
+
+    function isSecurityOrTechStory(story) {
+      const title = String(story.title || "").toLowerCase();
+      const url = String(story.url || "").toLowerCase();
+      return securityKeywords.some((keyword) => title.includes(keyword) || url.includes(keyword));
+    }
+
+    function renderNews(stories) {
+      if (!newsGrid || !newsStatus) return;
+
+      if (!stories.length) {
+        newsStatus.textContent = "No matching stories found right now. Try refreshing later.";
+        newsGrid.innerHTML = "";
+        return;
+      }
+
+      newsStatus.textContent = "Latest stories loaded.";
+      newsGrid.innerHTML = stories.slice(0, 6).map((story) => {
+        const storyUrl = story.url || `https://news.ycombinator.com/item?id=${story.id}`;
+        const commentsUrl = `https://news.ycombinator.com/item?id=${story.id}`;
+        const domain = getDomain(storyUrl);
+
+        return `
+          <a class="news-card" href="${escapeHTML(storyUrl)}" target="_blank" rel="noopener noreferrer">
+            <h3>${escapeHTML(story.title)}</h3>
+            <p>From ${escapeHTML(domain)}. Open the story to read the full article from the original source.</p>
+            <div class="news-meta">
+              <span class="news-pill">${escapeHTML(timeAgo(story.time))}</span>
+              <span class="news-pill">${Number(story.score || 0)} points</span>
+              <span class="news-pill">${Number(story.descendants || 0)} comments</span>
+              <span class="news-pill">HN discussion</span>
+            </div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    async function loadLatestNews() {
+      if (!newsGrid || !newsStatus) return;
+
+      newsStatus.textContent = "Loading latest stories...";
+      newsGrid.innerHTML = "";
+
+      try {
+        const idsResponse = await fetch("https://hacker-news.firebaseio.com/v0/newstories.json");
+        if (!idsResponse.ok) throw new Error("Could not load story list.");
+
+        const ids = await idsResponse.json();
+        const selectedIds = ids.slice(0, 40);
+        const storyRequests = selectedIds.map((id) =>
+          fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((response) => response.json())
+        );
+
+        const stories = (await Promise.all(storyRequests))
+          .filter((story) => story && story.type === "story" && story.title)
+          .filter(isSecurityOrTechStory);
+
+        renderNews(stories.length ? stories : []);
+      } catch (error) {
+        newsStatus.textContent = "News could not load. Check your internet connection and refresh the page.";
+        newsGrid.innerHTML = "";
+      }
+    }
+
+    if (refreshNews) {
+      refreshNews.addEventListener("click", loadLatestNews);
+    }
+
+    loadLatestNews();
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -1522,6 +1712,5 @@
     );
 
     sections.forEach((section) => observer.observe(section));
-  </script>
-</body>
+  </script></body>
 </html>
