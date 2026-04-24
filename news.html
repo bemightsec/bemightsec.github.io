@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Latest Tech & Cyber News | BeMight</title>
+  <link rel="icon" type="image/png" sizes="32x32" href="fav.png" />
+  <meta
+    name="description"
+    content="Latest technology and cybersecurity news curated for BeMight Security."
+  />
+  <meta name="theme-color" content="#07100d" />
+
+  <style>
+    :root {
+      --bg: #07100d;
+      --bg-2: #0a1511;
+      --nav: rgba(7, 16, 13, 0.92);
+      --surface: #101c17;
+      --surface-2: #14231d;
+      --paper: #f7f3e9;
+      --paper-soft: #fffaf1;
+      --ink: #111a15;
+      --ink-soft: #3f4f47;
+      --text: #e9f7ef;
+      --muted: #9ab0a5;
+      --muted-2: #c7d6ce;
+      --green: #77f2a1;
+      --lime: #b8ff6a;
+      --orange: #ffb36b;
+      --line: rgba(233, 247, 239, 0.12);
+      --line-strong: rgba(119, 242, 161, 0.28);
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.32);
+      --shadow-soft: 0 16px 34px rgba(0, 0, 0, 0.13);
+      --radius-lg: 28px;
+      --radius: 20px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+      line-height: 1.65;
+      background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 48%, #0c120f 100%);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(119, 242, 161, 0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(119, 242, 161, 0.022) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 76%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--green);
+      outline-offset: 4px;
+    }
+
+    .container {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .top-accent {
+      height: 5px;
+      background: linear-gradient(90deg, var(--green), var(--lime), var(--orange));
+      box-shadow: 0 0 22px rgba(119, 242, 161, 0.22);
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--line);
+      background: var(--nav);
+      backdrop-filter: blur(18px);
+    }
+
+    .header-row {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .brand-logo {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      border-radius: 12px;
+      flex: 0 0 auto;
+    }
+
+    .brand-text strong {
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-text span {
+      display: block;
+      color: var(--muted);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .menu-btn {
+      display: none;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      font-weight: 800;
+    }
+
+    .site-nav {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .site-nav a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 12px;
+      border-radius: 999px;
+      color: var(--muted-2);
+      font-size: 0.92rem;
+      font-weight: 750;
+      transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: #07100d;
+      background: var(--green);
+      transform: translateY(-1px);
+    }
+
+    .page-hero {
+      padding: 54px 0 34px;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+    }
+
+    .crumbs {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 800;
+    }
+
+    .crumbs a {
+      color: var(--green);
+    }
+
+    .crumb-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--muted);
+      opacity: 0.8;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border: 1px solid var(--line-strong);
+      border-radius: 999px;
+      color: var(--green);
+      background: rgba(119, 242, 161, 0.07);
+      font-family: Consolas, "SFMono-Regular", Menlo, monospace;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+    }
+
+    .page-hero h1 {
+      max-width: 880px;
+      margin: 18px auto 14px;
+      color: #fff;
+      font-size: clamp(2rem, 6vw, 4.2rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .page-hero p {
+      max-width: 780px;
+      margin: 0 auto;
+      color: var(--muted-2);
+      font-size: clamp(1rem, 2vw, 1.18rem);
+    }
+
+    .news-page {
+      padding: 36px 0 54px;
+    }
+
+    .news-shell {
+      min-height: 70vh;
+      padding: 24px;
+      border-radius: var(--radius-lg);
+      color: var(--ink);
+      background: linear-gradient(180deg, var(--paper-soft), var(--paper));
+      border: 1px solid rgba(17, 26, 21, 0.08);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .news-controls {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 18px;
+      padding: 14px;
+      border: 1px solid rgba(17, 26, 21, 0.08);
+      border-radius: 18px;
+      background: #fffdf7;
+    }
+
+    .news-source {
+      color: #53665c;
+      font-size: 0.94rem;
+      font-weight: 750;
+    }
+
+    .news-source strong {
+      color: #165936;
+    }
+
+    .news-refresh {
+      min-height: 42px;
+      padding: 0 15px;
+      border: 0;
+      border-radius: 999px;
+      color: #07100d;
+      background: var(--green);
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .news-status {
+      margin: 0 0 18px;
+      color: #53665c;
+      font-size: 0.95rem;
+      font-weight: 750;
+    }
+
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .news-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 220px;
+      padding: 18px;
+      border: 1px solid rgba(17, 26, 21, 0.09);
+      border-radius: 22px;
+      background: #fffdf7;
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+
+    .news-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(50, 212, 125, 0.45);
+      box-shadow: 0 18px 30px rgba(17, 26, 21, 0.1);
+    }
+
+    .news-card h2 {
+      margin: 0 0 10px;
+      color: var(--ink);
+      font-size: 1.08rem;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    .news-card p {
+      margin: 0;
+      color: var(--ink-soft);
+      font-size: 0.94rem;
+    }
+
+    .news-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 18px;
+    }
+
+    .news-pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 0 9px;
+      border-radius: 999px;
+      color: #165936;
+      background: #e7f7ec;
+      border: 1px solid rgba(22, 89, 54, 0.08);
+      font-size: 0.75rem;
+      font-weight: 850;
+    }
+
+    .iframe-block {
+      display: none;
+      height: calc(100vh - 96px);
+      min-height: 680px;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+
+    .iframe-block iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #fff;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      width: 48px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      background: var(--green);
+      color: #07100d;
+      font-size: 1.35rem;
+      font-weight: 950;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s ease;
+      z-index: 999;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .site-footer {
+      padding: 34px 0 44px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-nav a:hover {
+      color: var(--green);
+    }
+
+    @media (max-width: 960px) {
+      .news-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 860px) {
+      .header-row {
+        min-height: 68px;
+      }
+
+      .menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .site-nav {
+        position: absolute;
+        left: 16px;
+        right: 16px;
+        top: 78px;
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        padding: 12px;
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        background: rgba(7, 16, 13, 0.97);
+        box-shadow: var(--shadow);
+      }
+
+      .site-nav.show {
+        display: flex;
+      }
+
+      .site-nav a {
+        justify-content: flex-start;
+        padding: 0 14px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .container {
+        width: min(100% - 22px, var(--max));
+      }
+
+      .brand-text span {
+        display: none;
+      }
+
+      .page-hero {
+        padding: 40px 0 28px;
+      }
+
+      .news-shell {
+        padding: 16px;
+        border-radius: 22px;
+      }
+
+      .news-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .news-refresh {
+        width: 100%;
+      }
+
+      .news-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-row {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="top-accent" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="Back to BeMight homepage">
+        <img class="brand-logo" src="securitylogo.png" alt="BeMight Security logo" />
+        <span class="brand-text">
+          <strong>BeMight</strong>
+          <span>Cybersecurity Portfolio</span>
+        </span>
+      </a>
+
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+
+      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="news.html" class="active">News</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#certifications">Certifications</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="page-hero" id="top">
+    <div class="container">
+      <div class="crumbs" aria-label="Page location">
+        <a href="index.html">Portfolio</a>
+        <span class="crumb-dot" aria-hidden="true"></span>
+        <span>Latest News</span>
+        <span class="crumb-dot" aria-hidden="true"></span>
+        <span>Tech & Cybersecurity</span>
+      </div>
+
+      <span class="tag">Live News Page</span>
+      <h1>Latest Tech & Cyber News</h1>
+      <p>
+        A standalone news page for tracking recent technology and cybersecurity-related stories. This page keeps the
+        portfolio active while separating news from the main proof-of-work homepage.
+      </p>
+    </div>
+  </section>
+
+  <main class="news-page">
+    <div class="container">
+      <section class="news-shell" aria-labelledby="news-title">
+        <div class="news-controls">
+          <div class="news-source">
+            <strong id="news-title">Source:</strong> Hacker News public API • filtered for security and technology topics
+          </div>
+          <button class="news-refresh" type="button" id="refreshNews">Refresh News</button>
+        </div>
+
+        <p class="news-status" id="newsStatus">Loading latest stories...</p>
+        <div class="news-grid" id="newsGrid" aria-live="polite"></div>
+      </section>
+
+      <!--
+        Optional iframe layout:
+        Many major news websites block iframe embedding for security reasons.
+        If you later find a source that allows iframe embedding, you can display it here by removing display:none from .iframe-block.
+      -->
+      <section class="iframe-block" aria-label="Embedded news source">
+        <iframe src="https://news.ycombinator.com/" title="Embedded news source"></iframe>
+      </section>
+    </div>
+  </main>
+
+  <a href="#top" class="back-to-top" id="backToTop" aria-label="Back to top">↑</a>
+
+  <footer class="site-footer">
+    <div class="container footer-row">
+      <div>© 2026 BeMight. All rights reserved.</div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="index.html#about">About</a>
+        <a href="index.html#projects">Projects</a>
+        <a href="news.html">News</a>
+        <a href="index.html#tools">Tools</a>
+        <a href="index.html#certifications">Certifications</a>
+        <a href="index.html#contact">Contact</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-btn");
+    const siteNav = document.getElementById("site-nav");
+    const navLinks = [...document.querySelectorAll(".site-nav a")];
+    const backToTop = document.getElementById("backToTop");
+    const newsGrid = document.getElementById("newsGrid");
+    const newsStatus = document.getElementById("newsStatus");
+    const refreshNews = document.getElementById("refreshNews");
+
+    function setMenu(open) {
+      if (!siteNav || !menuButton) return;
+      siteNav.classList.toggle("show", open);
+      menuButton.setAttribute("aria-expanded", String(open));
+    }
+
+    if (menuButton && siteNav) {
+      menuButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const isOpen = menuButton.getAttribute("aria-expanded") === "true";
+        setMenu(!isOpen);
+      });
+
+      siteNav.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (window.innerWidth <= 860) setMenu(false);
+        });
+      });
+
+      document.addEventListener("click", (event) => {
+        const isMenuOpen = siteNav.classList.contains("show");
+        if (!isMenuOpen) return;
+
+        const clickedInsideMenu = siteNav.contains(event.target);
+        const clickedButton = menuButton.contains(event.target);
+
+        if (!clickedInsideMenu && !clickedButton) {
+          setMenu(false);
+        }
+      });
+
+      window.addEventListener("resize", () => {
+        if (window.innerWidth > 860) setMenu(false);
+      });
+
+      window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") setMenu(false);
+      });
+    }
+
+    if (backToTop) {
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add("show");
+        } else {
+          backToTop.classList.remove("show");
+        }
+      });
+    }
+
+    const securityKeywords = [
+      "security", "cyber", "breach", "vulnerability", "malware", "ransomware", "phishing",
+      "privacy", "encryption", "zero day", "zero-day", "cve", "exploit", "hack", "hacker",
+      "data leak", "authentication", "password", "microsoft", "linux", "ai", "cloud"
+    ];
+
+    function escapeHTML(value) {
+      return String(value || "").replace(/[&<>'"]/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "'": "&#39;",
+        "\"": "&quot;"
+      }[char]));
+    }
+
+    function getDomain(url) {
+      try {
+        return new URL(url).hostname.replace(/^www\./, "");
+      } catch {
+        return "news.ycombinator.com";
+      }
+    }
+
+    function timeAgo(unixTime) {
+      if (!unixTime) return "Recent";
+      const seconds = Math.floor(Date.now() / 1000 - unixTime);
+      const minutes = Math.floor(seconds / 60);
+      const hours = Math.floor(minutes / 60);
+      const days = Math.floor(hours / 24);
+
+      if (days > 0) return `${days}d ago`;
+      if (hours > 0) return `${hours}h ago`;
+      if (minutes > 0) return `${minutes}m ago`;
+      return "Just now";
+    }
+
+    function isSecurityOrTechStory(story) {
+      const title = String(story.title || "").toLowerCase();
+      const url = String(story.url || "").toLowerCase();
+      return securityKeywords.some((keyword) => title.includes(keyword) || url.includes(keyword));
+    }
+
+    function renderNews(stories) {
+      if (!newsGrid || !newsStatus) return;
+
+      if (!stories.length) {
+        newsStatus.textContent = "No matching stories found right now. Try refreshing later.";
+        newsGrid.innerHTML = "";
+        return;
+      }
+
+      newsStatus.textContent = "Latest stories loaded.";
+      newsGrid.innerHTML = stories.slice(0, 12).map((story) => {
+        const storyUrl = story.url || `https://news.ycombinator.com/item?id=${story.id}`;
+        const domain = getDomain(storyUrl);
+
+        return `
+          <a class="news-card" href="${escapeHTML(storyUrl)}" target="_blank" rel="noopener noreferrer">
+            <h2>${escapeHTML(story.title)}</h2>
+            <p>From ${escapeHTML(domain)}. Open the story to read the full article from the original source.</p>
+            <div class="news-meta">
+              <span class="news-pill">${escapeHTML(timeAgo(story.time))}</span>
+              <span class="news-pill">${Number(story.score || 0)} points</span>
+              <span class="news-pill">${Number(story.descendants || 0)} comments</span>
+            </div>
+          </a>
+        `;
+      }).join("");
+    }
+
+    async function loadLatestNews() {
+      if (!newsGrid || !newsStatus) return;
+
+      newsStatus.textContent = "Loading latest stories...";
+      newsGrid.innerHTML = "";
+
+      try {
+        const idsResponse = await fetch("https://hacker-news.firebaseio.com/v0/newstories.json");
+        if (!idsResponse.ok) throw new Error("Could not load story list.");
+
+        const ids = await idsResponse.json();
+        const selectedIds = ids.slice(0, 70);
+        const storyRequests = selectedIds.map((id) =>
+          fetch(`https://hacker-news.firebaseio.com/v0/item/${id}.json`).then((response) => response.json())
+        );
+
+        const stories = (await Promise.all(storyRequests))
+          .filter((story) => story && story.type === "story" && story.title)
+          .filter(isSecurityOrTechStory);
+
+        renderNews(stories);
+      } catch (error) {
+        newsStatus.textContent = "News could not load. Check your internet connection and refresh the page.";
+        newsGrid.innerHTML = "";
+      }
+    }
+
+    if (refreshNews) {
+      refreshNews.addEventListener("click", loadLatestNews);
+    }
+
+    loadLatestNews();
+  </script>
+</body>
+</html>
