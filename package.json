@@ -1,0 +1,12 @@
+{
+  "name": "bemight-security-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static GitHub Pages portfolio for BeMight Security.",
+  "scripts": {
+    "update-news": "node scripts/fetch-rss.js"
+  },
+  "dependencies": {
+    "rss-parser": "^3.13.0"
+  }
+}
